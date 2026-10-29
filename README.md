@@ -1,4 +1,5 @@
 # [N] Hotel's - Luxury Rooms | Pithapuram
+
 ## Modern OTA-Style Interactive Prototype (Phase 1)
 
 **Target Property:** [N] Hotel's - Luxury Rooms  
@@ -9,6 +10,7 @@
 ---
 
 ### How to Run & Demonstrate to MD
+
 1. **Zero Database / Zero Server Setup:** Simply open `n_hotels_luxury_prototype.html` (or `index.html`) in any modern browser, or run via VS Code Live Server (`http://127.0.0.1:5500/N-Hotels-Web-Prototype/n_hotels_luxury_prototype.html`).
 2. **MakeMyTrip & Goibibo Aligned Interface:**
    - **Guest Booking Portal:** Clean, modern sans-serif interface (Plus Jakarta Sans & Inter), verified photo mosaic, real-time booking search bar with 07:00 AM pilgrim darshan cycle, transparent OTA price comparisons (₹1,450 direct vs ₹1,559 MakeMyTrip and ₹1,666 Goibibo), room cards, landmark distances (250m to Sri Pada Vallabha Temple), amenities, guest reviews, and 1-click WhatsApp enquiry checkout.
