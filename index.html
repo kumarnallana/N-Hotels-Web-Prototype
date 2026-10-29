@@ -108,15 +108,7 @@
         makemytrip: 1559,
         goibibo: 1666,
         savingsGoibibo: 216
-      },
-      distances: [
-        { name: "Sri Pada Sri Vallabha Temple", distance: "250 metres", time: "3 min walk" },
-        { name: "Puruhutika Devi Shakti Peetham (Kukkuteswara Swamy)", distance: "1.2 km", time: "5 min auto" },
-        { name: "Kunti Madhava Swamy Temple", distance: "1.5 km", time: "6 min auto" },
-        { name: "Pithapuram Railway Station (PAP)", distance: "1.1 km", time: "4 min auto" },
-        { name: "Samalkot Junction Railway Station (SLO)", distance: "13 km", time: "20 min drive" },
-        { name: "Rajahmundry Airport (RJA)", distance: "64 km", time: "75 min drive" }
-      ]
+      }
     };
 
     // Verified Accurate Amenities (The 8 Ground-Truth Hotel Capabilities)
@@ -203,6 +195,125 @@
       }
     ];
 
+    // Comprehensive Interactive Sacred Landmarks & Transit Data
+    const SACRED_LANDMARKS = [
+      {
+        id: "sripada",
+        name: "Sri Pada Sri Vallabha Temple",
+        type: "Sacred Birthplace & Samsthanam",
+        distance: "250 metres",
+        time: "3 min walk",
+        tag: "Primary Pilgrim Destination",
+        summary: "Birthplace and divine abode of Sri Pada Sri Vallabha, the first avatar of Lord Dattatreya in Kali Yuga.",
+        significance: "Considered one of the holiest Dattatreya kshetrams in India. Devotees visit from across Maharashtra, Karnataka, and Andhra Pradesh for Paduka darshan, morning Abhishekam, and sacred parayana. Located just 250 metres from [N] Hotel's at Park Centre.",
+        darshanTimings: "05:00 AM to 12:30 PM and 04:30 PM to 09:00 PM",
+        aartiTimings: "Kakada Aarti: 05:00 AM | Madhyahna Aarti: 12:00 PM | Sheja Aarti: 08:30 PM",
+        annadanam: "Daily free Mahaprasadam served from 12:00 PM to 02:00 PM at the temple dining hall.",
+        dressCode: "Traditional Hindu attire: Dhoti/Kurta for men, Sarees/Churidars for women.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Sri+Pada+Sri+Vallabha+Temple+Pithapuram",
+        aiInsights: [
+          { q: "What is the best time for darshan?", a: "Early morning 05:30 AM Abhishekam is the most peaceful with minimal queue. [N] Hotel's 07:00 AM check-in cycle allows you to attend early darshan comfortably." },
+          { q: "How far is it from [N] Hotel's?", a: "Only 250 metres. Step out of VVS Grand, walk straight past Canara Bank toward the temple entrance (approximately 3 minutes walk)." },
+          { q: "Is Annadanam prasadam available?", a: "Yes, Sri Pada Vallabha Samsthanam serves daily free Mahaprasadam between 12:00 PM and 02:00 PM to all visiting pilgrims." }
+        ]
+      },
+      {
+        id: "puruhutika",
+        name: "Puruhutika Devi Shakti Peetham",
+        type: "Astadasa Maha Shakti Peetham",
+        distance: "1.2 km",
+        time: "5 min auto",
+        tag: "18 Maha Shakti Peethas",
+        summary: "One of the 18 revered Maha Shakti Peethas, located inside the ancient Kukkuteswara Swamy Temple complex.",
+        significance: "Here Devi Sati's hip (Puruhutika) fell. The temple complex also houses the sacred Pada Gaya Sarovaram (where pilgrims perform holy dips and ancestral rites) and the ancient Svayambhu Kukkuteswara Swamy lingam.",
+        darshanTimings: "05:30 AM to 12:30 PM and 04:30 PM to 08:30 PM",
+        aartiTimings: "Morning Puja: 06:00 AM | Archana: Throughout morning | Evening Harati: 07:30 PM",
+        annadanam: "Temple prasadam counters available in the courtyard.",
+        dressCode: "Traditional temple attire recommended.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Puruhutika+Devi+Temple+Kukkuteswara+Swamy+Pithapuram",
+        aiInsights: [
+          { q: "What rituals are performed at Pada Gaya?", a: "Pilgrims perform holy snanam (bath) in Pada Gaya pond and offer Pinda Pradanam for ancestors before having darshan of Lord Kukkuteswara and Puruhutika Devi." },
+          { q: "What is the auto fare from [N] Hotel's?", a: "A local auto from Park Centre to the temple complex takes 5 minutes and costs approximately ₹40 to ₹50." }
+        ]
+      },
+      {
+        id: "kuntimadhava",
+        name: "Kunti Madhava Swamy Temple",
+        type: "Pancha Madhava Kshetram",
+        distance: "1.5 km",
+        time: "6 min auto",
+        tag: "Ancient Dwapara Temple",
+        summary: "One of the five sacred Pancha Madhava temples in India, worshipped by Kunti Devi and the Pandavas.",
+        significance: "Established by Lord Indra to atone for sin, and later worshipped by Kunti Devi. Enshrines Lord Vishnu as Sri Madhava Swamy with Sridevi and Bhudevi. Known for exquisite ancient stone architecture and serene atmosphere.",
+        darshanTimings: "06:00 AM to 12:00 PM and 04:30 PM to 08:00 PM",
+        aartiTimings: "Morning Suprabhatam: 06:00 AM | Nitya Puja: 07:30 AM | Evening Sayaraksha: 07:00 PM",
+        annadanam: "Prasadam distribution during festival days and Ekadashi.",
+        dressCode: "Modest conservative clothing.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Kunti+Madhava+Swamy+Temple+Pithapuram",
+        aiInsights: [
+          { q: "Why is it called Kunti Madhava?", a: "During their exile, the Pandavas and their mother Kunti Devi lived in Pithapuram and worshipped Lord Vishnu here, giving the temple its revered name." },
+          { q: "How to combine with other temples?", a: "Pilgrims typically visit Sri Pada Vallabha Temple first (250m), then Puruhutika Devi and Kukkuteswara (1.2 km), followed by Kunti Madhava Swamy (1.5 km)." }
+        ]
+      },
+      {
+        id: "railway-station",
+        name: "Pithapuram Railway Station (PAP)",
+        type: "Mainline Railway Station",
+        distance: "1.1 km",
+        time: "4 min auto",
+        tag: "South Coast Railway",
+        summary: "Closest railway station connecting express trains on the Chennai to Howrah mainline.",
+        significance: "Key arrival point for devotees traveling via Janmabhoomi Express, Tirupati Express, Circar Express, and Simhadri Express. 24/7 auto rickshaws connect directly to Park Centre.",
+        darshanTimings: "Operational 24 Hours",
+        aartiTimings: "Passenger amenities: Waiting halls, computerized reservation counter, tea stalls.",
+        annadanam: "Direct 4-minute auto connection to [N] Hotel's dining and restaurants.",
+        dressCode: "Standard travel attire.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Pithapuram+Railway+Station",
+        aiInsights: [
+          { q: "How do I reach [N] Hotel's from the station?", a: "Step out of station exit gate. Take an auto to VVS Grand, Park Centre (Canara Bank building). Travel time is only 4 minutes and standard fare is ₹40 to ₹60." },
+          { q: "What if I arrive at 5:00 AM?", a: "Our front desk is staffed 24/7. With our 07:00 AM pilgrim check-in cycle, you can check in early without waiting for afternoon standard check-in." }
+        ]
+      },
+      {
+        id: "samalkot-junction",
+        name: "Samalkot Junction (SLO)",
+        type: "Major Railway Junction",
+        distance: "13 km",
+        time: "20 min drive",
+        tag: "Superfast & Vande Bharat Hub",
+        summary: "Major rail junction with stoppage for all superfast, Rajdhani, and Vande Bharat trains.",
+        significance: "The primary high-speed transit hub for Pithapuram pilgrims arriving from Hyderabad, Bengaluru, Visakhapatnam, and New Delhi. Connected via State Highway 40.",
+        darshanTimings: "Operational 24 Hours",
+        aartiTimings: "Full junction amenities with multi-platform connectivity and prepaid transport.",
+        annadanam: "Station food court and refreshment rooms available.",
+        dressCode: "Standard travel attire.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Samalkot+Junction+Railway+Station",
+        aiInsights: [
+          { q: "How to travel from Samalkot to [N] Hotel's?", a: "Dedicated auto rickshaws (₹200 to ₹250) and taxis (₹400 to ₹500) are available round the clock outside Platform 1. Drive time is 20 minutes directly to Park Centre." },
+          { q: "Can [N] Hotel's arrange station pickup?", a: "Yes, front desk staff at +91 95158 44616 can connect you with reliable local taxi operators upon request." }
+        ]
+      },
+      {
+        id: "rajahmundry-airport",
+        name: "Rajahmundry Airport (RJA)",
+        type: "Commercial Airport",
+        distance: "64 km",
+        time: "75 min drive",
+        tag: "Nearest Airport Hub",
+        summary: "Nearest operational airport with daily non-stop flights from Hyderabad, Bengaluru, and Chennai.",
+        significance: "Located at Madhurapudi along NH-16. Convenient gateway for interstate and overseas pilgrims visiting Sri Pada Vallabha Samsthanam.",
+        darshanTimings: "Operational according to flight schedules",
+        aartiTimings: "Terminal amenities: Taxi desk, security check, cafeteria.",
+        annadanam: "Airport cafe and highway restaurants along NH-16.",
+        dressCode: "Standard travel attire.",
+        mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rajahmundry+Airport",
+        aiInsights: [
+          { q: "What is the best way to reach from the airport?", a: "Take an airport taxi via NH-16 and ADB Road directly to Park Centre, Pithapuram. Drive time is approximately 1 hour 15 minutes." },
+          { q: "Which airlines fly to Rajahmundry?", a: "IndiGo operates regular daily non-stop flights from Hyderabad, Bengaluru, and Chennai." }
+        ]
+      }
+    ];
+
     // Initial Mock In-Memory Enquiries for Front Office Demonstration
     const INITIAL_ENQUIRIES = [
       {
@@ -248,6 +359,11 @@
       const [enquiries, setEnquiries] = useState(INITIAL_ENQUIRIES);
       const [mobileNavOpen, setMobileNavOpen] = useState(false);
       const [toastMessage, setToastMessage] = useState(null);
+
+      // Interactive Landmark Modal & N-AI State
+      const [selectedLandmark, setSelectedLandmark] = useState(null);
+      const [showAiConcierge, setShowAiConcierge] = useState(false);
+      const [aiActiveQuestion, setAiActiveQuestion] = useState(null);
 
       // Interactive Booking / Enquiry Form State
       const [formData, setFormData] = useState({
@@ -321,6 +437,13 @@
       const updateEnquiryStatus = (id, newStatus) => {
         setEnquiries(enquiries.map(enq => enq.id === id ? { ...enq, status: newStatus } : enq));
         triggerToast(`Enquiry ${id} marked as ${newStatus}.`);
+      };
+
+      // Open Landmark Modal
+      const openLandmarkModal = (landmark) => {
+        setSelectedLandmark(landmark);
+        setShowAiConcierge(false);
+        setAiActiveQuestion(null);
       };
 
       // Construct WhatsApp URL
@@ -492,7 +615,7 @@
               <section id="overview" class="pt-8 pb-10">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   
-                  <!-- Clean Property Header Banner (No Clumsy Rainbow Badges) -->
+                  <!-- Clean Property Header Banner -->
                   <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-border mb-6">
                     <div>
                       <div class="flex items-center space-x-2 text-xs text-slate-500 mb-2">
@@ -512,20 +635,32 @@
                         3rd Floor, VVS Grand, Canara Bank Premises, Park Centre, Pithapuram, Andhra Pradesh 533450. Elevated above street traffic, providing peaceful accommodations with elevator access and 24/7 front desk care.
                       </p>
 
-                      <!-- Landmark Distance Chips (Clean & Minimalist, No Emojis) -->
-                      <div class="flex flex-wrap items-center gap-3 mt-3.5 text-xs text-slate-600">
-                        <span class="inline-flex items-center space-x-1.5 bg-white px-3 py-1 rounded-md border border-surface-border font-medium">
+                      <!-- Landmark Distance Chips (Clickable to open temple info) -->
+                      <div class="flex flex-wrap items-center gap-2.5 mt-3.5 text-xs text-slate-600">
+                        <button 
+                          onClick=${() => openLandmarkModal(SACRED_LANDMARKS[0])}
+                          class="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-50 px-3 py-1 rounded-md border border-surface-border font-medium text-slate-700 transition-colors"
+                        >
                           <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
                           <span>250m to Sri Pada Sri Vallabha Temple (3-min walk)</span>
-                        </span>
-                        <span class="inline-flex items-center space-x-1.5 bg-white px-3 py-1 rounded-md border border-surface-border font-medium">
+                          <span class="text-[10px] text-slate-400">→</span>
+                        </button>
+                        <button 
+                          onClick=${() => openLandmarkModal(SACRED_LANDMARKS[1])}
+                          class="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-50 px-3 py-1 rounded-md border border-surface-border font-medium text-slate-700 transition-colors"
+                        >
                           <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
                           <span>1.2km to Puruhutika Devi Shakti Peetham</span>
-                        </span>
-                        <span class="inline-flex items-center space-x-1.5 bg-white px-3 py-1 rounded-md border border-surface-border font-medium">
+                          <span class="text-[10px] text-slate-400">→</span>
+                        </button>
+                        <button 
+                          onClick=${() => openLandmarkModal(SACRED_LANDMARKS[2])}
+                          class="inline-flex items-center space-x-1.5 bg-white hover:bg-slate-50 px-3 py-1 rounded-md border border-surface-border font-medium text-slate-700 transition-colors"
+                        >
                           <span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span>
-                          <span>1.1km to Pithapuram Railway Station</span>
-                        </span>
+                          <span>1.5km to Kunti Madhava Swamy Temple</span>
+                          <span class="text-[10px] text-slate-400">→</span>
+                        </button>
                       </div>
                     </div>
 
@@ -730,7 +865,7 @@
                               Comfortable king-size bed with split AC, attached geyser bathroom, and high-speed Wi-Fi.
                             </p>
 
-                            <!-- Clean Minimalist Inclusions (SVG Checkmarks) -->
+                            <!-- Inclusions (SVG Checkmarks) -->
                             <div class="grid grid-cols-2 gap-2 mt-4 text-xs text-slate-700">
                               <div class="flex items-center space-x-2">
                                 <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -888,18 +1023,21 @@
                   </div>
 
                   <!-- ==================================================== -->
-                  <!-- 8. NEARBY TEMPLES & SACRED LANDMARKS                -->
+                  <!-- 8. NEARBY TEMPLES & INTERACTIVE SACRED LANDMARKS    -->
                   <!-- ==================================================== -->
                   <div id="temples" class="scroll-mt-24 mb-16">
                     <div class="bg-white rounded-xl p-6 sm:p-8 border border-surface-border shadow-xs">
                       
                       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
+                          <div class="inline-flex items-center space-x-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-plum bg-brand-plumLight px-2 py-0.5 rounded mb-1.5">
+                            <span>Prime Location</span>
+                          </div>
                           <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
-                            Nearby Temples & Sacred Proximity
+                            Nearby Temples & Sacred Landmarks
                           </h2>
                           <p class="text-xs text-slate-500 mt-0.5">
-                            Central location at Park Centre with fast walking and auto access to pilgrimage destinations.
+                            Tap any temple below to view darshan timings, temple significance, live map, or ask N-AI.
                           </p>
                         </div>
 
@@ -907,7 +1045,7 @@
                           href=${HOTEL.googleMapsUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          class="bg-surface-subtle hover:bg-slate-200 text-slate-800 text-xs font-semibold px-4 py-2 rounded-lg border border-surface-borderDark transition-colors flex items-center space-x-1.5 shrink-0"
+                          class="bg-surface-subtle hover:bg-slate-200 text-slate-800 text-xs font-semibold px-4 py-2 rounded-lg border border-surface-borderDark transition-colors flex items-center space-x-1.5 shrink-0 self-start sm:self-auto"
                         >
                           <span>Open in Google Maps</span>
                           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -916,24 +1054,52 @@
                         </a>
                       </div>
 
+                      <!-- Interactive Clickable Cards Grid (Desktop & Mobile Optimized) -->
                       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-                        ${HOTEL.distances.map((dist, idx) => html`
-                          <div key=${idx} class="p-3.5 rounded-lg border border-surface-border bg-surface-subtle/40 flex items-center justify-between">
+                        ${SACRED_LANDMARKS.map((landmark) => html`
+                          <button 
+                            key=${landmark.id}
+                            type="button"
+                            onClick=${() => openLandmarkModal(landmark)}
+                            class="p-4 rounded-xl border border-surface-border bg-white hover:bg-surface-subtle/70 transition-all text-left flex flex-col justify-between group shadow-xs hover:border-brand-gold/60 focus:outline-none focus:ring-1 focus:ring-brand-plum"
+                          >
                             <div>
-                              <p class="text-xs font-bold text-slate-900">${dist.name}</p>
-                              <p class="text-[11px] text-slate-500 mt-0.5">${dist.time}</p>
+                              <div class="flex items-center justify-between mb-1.5">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-brand-plum px-1.5 py-0.5 rounded bg-brand-plumLight">
+                                  ${landmark.type}
+                                </span>
+                                <span class="text-xs font-bold text-slate-900 group-hover:text-brand-plum transition-colors">
+                                  ${landmark.distance}
+                                </span>
+                              </div>
+                              <h4 class="text-sm font-bold text-slate-900 group-hover:text-brand-plum transition-colors">
+                                ${landmark.name}
+                              </h4>
+                              <p class="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                                ${landmark.summary}
+                              </p>
                             </div>
-                            <span class="text-xs font-bold text-brand-plum shrink-0 ml-3">${dist.distance}</span>
-                          </div>
+
+                            <div class="mt-4 pt-3 border-t border-surface-border flex items-center justify-between text-[11px]">
+                              <span class="text-slate-500 font-medium">${landmark.time} from hotel</span>
+                              <span class="font-bold text-brand-plum flex items-center space-x-1 group-hover:translate-x-0.5 transition-transform">
+                                <span>Details & N-AI</span>
+                                <span>→</span>
+                              </span>
+                            </div>
+                          </button>
                         `)}
                       </div>
 
                       <!-- Operational 07:00 AM Cycle Note -->
-                      <div class="mt-5 p-3.5 rounded-lg bg-surface-subtle text-xs text-slate-700 border border-surface-border flex items-start space-x-2.5">
-                        <span class="font-bold text-brand-plum shrink-0">Note:</span>
-                        <p class="text-slate-600">
-                          To accommodate pilgrims arriving on early morning trains for temple darshan, [N] Hotel's offers a 24-hour cycle from 07:00 AM to 07:00 AM next day upon request, in addition to standard 11:00 AM check-ins.
-                        </p>
+                      <div class="mt-6 p-4 rounded-xl bg-surface-subtle text-xs text-slate-700 border border-surface-border flex items-start space-x-3">
+                        <span class="w-2 h-2 rounded-full bg-brand-gold mt-1.5 shrink-0"></span>
+                        <div>
+                          <p class="font-bold text-slate-900">Special 07:00 AM Pilgrim Darshan Cycle</p>
+                          <p class="text-slate-600 mt-0.5 leading-relaxed">
+                            Pithapuram pilgrims frequently arrive on early morning trains at 05:00 AM to 06:30 AM for morning darshan. [N] Hotel's offers a 24-hour cycle from 07:00 AM to 07:00 AM next day to accommodate early temple schedules without penalizing you for early arrival.
+                          </p>
+                        </div>
                       </div>
 
                     </div>
@@ -1230,6 +1396,161 @@
                 </div>
               </section>
 
+              <!-- ==================================================== -->
+              <!-- 12. SACRED LANDMARK & N-AI CONCIERGE MODAL / SHEET   -->
+              <!-- ==================================================== -->
+              ${selectedLandmark && html`
+                <div class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+                  
+                  <!-- Click Outside Backdrop -->
+                  <div class="fixed inset-0" onClick=${() => setSelectedLandmark(null)}></div>
+
+                  <!-- Modal Sheet Container (Mobile Bottom Sheet / Desktop Dialog) -->
+                  <div class="relative bg-white w-full sm:max-w-xl rounded-t-2xl sm:rounded-2xl shadow-2xl z-10 max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom duration-200">
+                    
+                    <!-- Mobile Drag Handle -->
+                    <div class="sm:hidden w-12 h-1 bg-slate-300 rounded-full mx-auto my-2.5 shrink-0"></div>
+
+                    <!-- Modal Header -->
+                    <div class="px-6 py-4 border-b border-surface-border flex items-start justify-between bg-white shrink-0">
+                      <div>
+                        <div class="flex items-center space-x-2">
+                          <span class="text-[10px] font-bold uppercase tracking-wider text-brand-plum px-2 py-0.5 rounded bg-brand-plumLight">
+                            ${selectedLandmark.type}
+                          </span>
+                          <span class="text-xs font-semibold text-slate-500">
+                            ${selectedLandmark.distance} (${selectedLandmark.time})
+                          </span>
+                        </div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900 mt-1">
+                          ${selectedLandmark.name}
+                        </h3>
+                      </div>
+
+                      <button 
+                        onClick=${() => setSelectedLandmark(null)}
+                        class="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-surface-subtle transition-colors"
+                        aria-label="Close Modal"
+                      >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <!-- Modal Scrollable Content -->
+                    <div class="px-6 py-5 overflow-y-auto space-y-5 text-xs text-slate-700">
+                      
+                      <!-- Sacred Significance -->
+                      <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
+                          Sacred Significance
+                        </h4>
+                        <p class="text-slate-800 leading-relaxed text-xs sm:text-sm">
+                          ${selectedLandmark.significance}
+                        </p>
+                      </div>
+
+                      <!-- Darshan & Schedule Grid -->
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-surface-subtle rounded-xl border border-surface-border">
+                        <div>
+                          <p class="font-bold text-slate-900 mb-0.5">Darshan Schedule</p>
+                          <p class="text-slate-600">${selectedLandmark.darshanTimings}</p>
+                        </div>
+                        <div>
+                          <p class="font-bold text-slate-900 mb-0.5">Aarti & Puja Timings</p>
+                          <p class="text-slate-600">${selectedLandmark.aartiTimings}</p>
+                        </div>
+                        <div class="sm:col-span-2 pt-2 border-t border-surface-borderDark/30">
+                          <p class="font-bold text-slate-900 mb-0.5">Prasadam / Annadanam</p>
+                          <p class="text-slate-600">${selectedLandmark.annadanam}</p>
+                        </div>
+                      </div>
+
+                      <!-- N-AI Interactive Concierge Section -->
+                      <div class="p-4 rounded-xl bg-brand-plumLight/60 border border-brand-plum/20">
+                        <div class="flex items-center justify-between mb-2">
+                          <div class="flex items-center space-x-1.5">
+                            <span class="w-2 h-2 rounded-full bg-brand-plum animate-pulse"></span>
+                            <span class="font-bold text-brand-plum uppercase text-[10px] tracking-wider">
+                              N-AI Pilgrim Concierge
+                            </span>
+                          </div>
+                          <span class="text-[10px] text-brand-plum/80 font-medium">Verified Local Advice</span>
+                        </div>
+
+                        <p class="text-slate-700 mb-3 text-[11px] leading-relaxed">
+                          Tap any common pilgrim question below for instant answers from [N] Hotel's concierge intelligence:
+                        </p>
+
+                        <!-- Pre-set Questions -->
+                        <div class="space-y-1.5">
+                          ${selectedLandmark.aiInsights.map((item, idx) => html`
+                            <div key=${idx} class="bg-white rounded-lg border border-surface-border overflow-hidden">
+                              <button 
+                                onClick=${() => setAiActiveQuestion(aiActiveQuestion === idx ? null : idx)}
+                                class="w-full px-3 py-2 text-left text-xs font-semibold text-slate-800 flex items-center justify-between hover:bg-slate-50 transition-colors"
+                              >
+                                <span>${item.q}</span>
+                                <span class="text-brand-plum font-bold ml-2">${aiActiveQuestion === idx ? '−' : '+'}</span>
+                              </button>
+                              ${aiActiveQuestion === idx && html`
+                                <div class="px-3 pb-2.5 pt-1 text-[11px] text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
+                                  ${item.a}
+                                </div>
+                              `}
+                            </div>
+                          `)}
+                        </div>
+                      </div>
+
+                      <!-- Front Desk Assistance Notice -->
+                      <div class="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-surface-border">
+                        <span>Need transport or early wakeup call?</span>
+                        <a href="tel:${HOTEL.phoneRaw}" class="text-brand-plum font-bold hover:underline">
+                          Call Front Desk: +91 95158 44616
+                        </a>
+                      </div>
+
+                    </div>
+
+                    <!-- Sticky Bottom Action Bar (User Requested Layout) -->
+                    <div class="px-6 py-3.5 bg-surface-subtle border-t border-surface-border flex items-center justify-between gap-3 shrink-0">
+                      
+                      <!-- Left Button: View live map location -->
+                      <a 
+                        href=${selectedLandmark.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex-1 bg-white hover:bg-slate-100 text-slate-800 text-xs font-semibold py-2.5 px-3 rounded-lg border border-surface-borderDark text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
+                      >
+                        <svg class="w-4 h-4 text-brand-gold shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span>View live map location</span>
+                      </a>
+
+                      <!-- Right Button: View NAI (for more information) -->
+                      <button 
+                        onClick=${() => {
+                          setAiActiveQuestion(0);
+                          triggerToast("N-AI Concierge insights loaded.");
+                        }}
+                        class="flex-1 bg-brand-plum hover:bg-brand-plumHover text-white text-xs font-semibold py-2.5 px-3 rounded-lg text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
+                      >
+                        <svg class="w-4 h-4 text-amber-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span>View NAI (for more info)</span>
+                      </button>
+
+                    </div>
+
+                  </div>
+                </div>
+              `}
+
               <!-- Minimal Footer (Zero Em Dashes) -->
               <footer class="bg-white border-t border-surface-border text-xs py-8 text-slate-500">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1250,7 +1571,7 @@
           `}
 
           <!-- ==================================================== -->
-          <!-- 12. FRONT OFFICE EXTRANET (HOTEL DESK MANAGEMENT)   -->
+          <!-- 13. FRONT OFFICE EXTRANET (HOTEL DESK MANAGEMENT)   -->
           <!-- ==================================================== -->
           ${view === 'extranet' && html`
             <div class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
