@@ -102,6 +102,300 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #8f6e32;
       }
+    
+    /* Scoped styles for .nh-home (Navbar & Hero) */
+    .nh-home {
+      --nh-gold: #d9b977;
+      --nh-gold-light: #ebd4a5;
+      --nh-white: #ffffff;
+      position: relative;
+      isolation: isolate;
+      color: var(--nh-white);
+      background: #302824;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .nh-home, .nh-home * { box-sizing: border-box; }
+    .nh-home a { color: inherit; text-decoration: none; }
+    .nh-home button { font: inherit; cursor: pointer; }
+    .nh-home :is(a, button):focus-visible { outline: 3px solid var(--nh-gold-light); outline-offset: 5px; }
+    .nh-home .nh-container { width: min(1180px, calc(100% - 60px)); margin-inline: auto; }
+
+    /* NAVBAR */
+    .nh-home .nh-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 20;
+      border-bottom: 1px solid rgb(255 255 255 / 15%);
+      background: linear-gradient(to bottom, rgb(20 16 13 / 65%), transparent);
+    }
+    .nh-home .nh-navbar {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nh-home .nh-brand { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .nh-home .nh-monogram {
+      color: var(--nh-gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -3px;
+      padding-right: 3px;
+      font-weight: 700;
+    }
+    .nh-home .nh-brand-copy { display: grid; gap: 2px; }
+    .nh-home .nh-brand-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 26px;
+      font-style: italic;
+      line-height: 1;
+      color: #ffffff;
+    }
+    .nh-home .nh-brand-tagline {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--nh-gold);
+      font-weight: 600;
+    }
+    .nh-home .nh-navigation { display: flex; align-items: center; gap: 24px; }
+    .nh-home .nh-nav-link {
+      position: relative;
+      padding-block: 10px;
+      font-size: 14px;
+      color: rgb(255 255 255 / 92%);
+      transition: color 180ms ease;
+    }
+    .nh-home .nh-nav-link:hover, .nh-home .nh-nav-link[aria-current="page"] { color: var(--nh-gold-light); }
+    .nh-home .nh-nav-link[aria-current="page"]::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: var(--nh-gold);
+    }
+    .nh-home .nh-signup {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 24px;
+      border: 1px solid var(--nh-gold);
+      border-radius: 30px;
+      background: var(--nh-gold);
+      color: #30251c;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+    .nh-home .nh-signup:hover { background: var(--nh-gold-light); transform: translateY(-1px); }
+    .nh-home .nh-menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgb(255 255 255 / 40%);
+      border-radius: 6px;
+      background: rgb(0 0 0 / 25%);
+      color: white;
+    }
+    .nh-home .nh-menu-toggle svg { width: 23px; height: 23px; }
+
+    /* HERO */
+    .nh-home .nh-hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      min-height: 620px;
+      min-height: clamp(540px, 78svh, 800px);
+      overflow: hidden;
+    }
+    .nh-home .nh-slides, .nh-home .nh-shade { position: absolute; inset: 0; pointer-events: none; }
+    .nh-home .nh-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 650ms ease;
+    }
+    .nh-home .nh-slide.is-active { opacity: 1; }
+    .nh-home .nh-shade {
+      background:
+        linear-gradient(90deg, rgb(19 15 13 / 82%) 0%, rgb(19 15 13 / 50%) 42%, rgb(19 15 13 / 15%) 100%),
+        linear-gradient(0deg, rgb(19 15 13 / 35%), transparent 40%);
+    }
+    .nh-home .nh-hero-content {
+      position: relative;
+      z-index: 1;
+      padding-top: 130px;
+      padding-bottom: 110px;
+    }
+    .nh-home .nh-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 20px;
+      color: var(--nh-gold-light);
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .nh-home .nh-eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      flex-shrink: 0;
+      background: var(--nh-gold);
+    }
+    .nh-home .nh-title {
+      max-width: 680px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.14;
+      letter-spacing: -1.5px;
+      font-weight: 400;
+      text-wrap: balance;
+      text-shadow: 0 2px 20px rgb(0 0 0 / 30%);
+    }
+    .nh-home .nh-title span { display: block; margin-bottom: 6px; font-style: italic; color: #ffffff; }
+    .nh-home .nh-description {
+      max-width: 440px;
+      margin: 20px 0 28px;
+      color: rgb(255 255 255 / 88%);
+      font-size: 14.5px;
+      line-height: 1.8;
+    }
+    .nh-home .nh-book {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      min-height: 48px;
+      padding: 13px 28px;
+      border: 1px solid var(--nh-gold);
+      border-radius: 4px;
+      background: var(--nh-gold);
+      color: #30251c;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+    .nh-home .nh-book:hover { background: var(--nh-gold-light); transform: translateY(-2px); }
+
+    /* SLIDER CONTROLS */
+    .nh-home .nh-slider-controls {
+      position: absolute;
+      z-index: 2;
+      bottom: 28px;
+      left: 50%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transform: translateX(-50%);
+    }
+    .nh-home .nh-dot {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 34px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    .nh-home .nh-dot::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgb(255 255 255 / 75%);
+      border-radius: 50%;
+      background: rgb(255 255 255 / 55%);
+      transition: background 180ms ease, box-shadow 180ms ease;
+    }
+    .nh-home .nh-dot[aria-pressed="true"]::before {
+      border-color: var(--nh-gold);
+      background: var(--nh-gold);
+      box-shadow: 0 0 0 4px rgb(217 185 119 / 25%);
+    }
+
+    /* 250 METRES SECTION */
+    .nh-temple-section {
+      background: #faf8f5;
+      padding: 56px 20px 48px;
+      text-align: center;
+      border-bottom: 1px solid #ebe5de;
+    }
+    .nh-temple-kicker {
+      display: inline-block;
+      color: #8F6E32;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .nh-temple-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(26px, 3.2vw, 40px);
+      color: #181412;
+      font-weight: 700;
+      margin: 0 0 14px;
+      letter-spacing: -0.5px;
+    }
+    .nh-temple-desc {
+      max-width: 640px;
+      margin: 0 auto 30px;
+      color: #5c544e;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 800px) {
+      .nh-home .nh-container { width: calc(100% - 32px); }
+      .nh-home .nh-navbar { min-height: 80px; }
+      .nh-home .nh-brand-name { font-size: 24px; }
+      .nh-home .nh-monogram { font-size: 34px; }
+      .nh-home .nh-menu-toggle { display: inline-flex; }
+      .nh-home .nh-navigation {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        border-top: 1px solid rgb(255 255 255 / 12%);
+        background: #241d1a;
+        box-shadow: 0 15px 25px rgb(0 0 0 / 30%);
+      }
+      .nh-home .nh-navigation.is-open { display: flex; }
+      .nh-home .nh-nav-link { padding: 12px 8px; }
+      .nh-home .nh-nav-link[aria-current="page"]::after { left: 8px; }
+      .nh-home .nh-signup { align-self: flex-start; margin-top: 10px; }
+      .nh-home .nh-hero { min-height: 560px; }
+      .nh-home .nh-slide { object-position: 60% center; }
+      .nh-home .nh-shade {
+        background: linear-gradient(90deg, rgb(19 15 13 / 85%), rgb(19 15 13 / 45%));
+      }
+      .nh-home .nh-hero-content { padding-top: 120px; padding-bottom: 90px; }
+      .nh-home .nh-title { max-width: 520px; letter-spacing: -1px; }
+      .nh-home .nh-description { max-width: 350px; font-size: 13.5px; }
+    }
+
     </style>
   </head>
   <body class="selection:bg-brand-plum selection:text-white">
@@ -545,6 +839,7 @@
         const [view, setView] = useState("guest"); // 'guest' | 'extranet'
         const [enquiries, setEnquiries] = useState(INITIAL_ENQUIRIES);
         const [mobileNavOpen, setMobileNavOpen] = useState(false);
+        const [heroSlide, setHeroSlide] = useState(0);
         const [toastMessage, setToastMessage] = useState(null);
 
         // Interactive Landmark Modal & N-AI State
@@ -650,6 +945,12 @@
         };
 
         // Construct WhatsApp URL
+                const heroSlides = [
+          PROPERTY_IMAGES.mainBedroom,
+          PROPERTY_IMAGES.executiveBed,
+          PROPERTY_IMAGES.bathroomGeyser,
+        ];
+
         const whatsappUrl = useMemo(() => {
           const text =
             `Hello [N] Hotel's Front Office, I would like to enquire about room availability.%0A%0A` +
@@ -739,348 +1040,151 @@
             ${view === "guest" &&
             html`
               <div class="flex-grow">
-                <!-- Clean, Elegant Luxury Header (Uncluttered, No Duplicate Prices) -->
-                <header
-                  class="bg-white/95 backdrop-blur-md border-b border-surface-border sticky top-0 z-40"
-                >
-                  <div
-                    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between"
-                  >
-                    <!-- Brand Identity: Crisp Crest + Refined Typographic Lockup (No Duplicate Subtitle) -->
-                    <div class="flex items-center space-x-3.5">
-                      <img
-                        src=${BRAND_LOGO}
-                        alt="[N] Hotel's Brand Emblem"
-                        class="h-11 w-11 rounded-lg object-cover shadow-xs border border-brand-gold/40"
-                      />
-                      <div>
-                        <div class="flex items-center space-x-2">
-                          <span
-                            class="text-xl font-bold tracking-tight text-surface-dark leading-none"
-                          >
-                            [N] Hotel's
-                          </span>
-                          <span
-                            class="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-brand-plumLight text-brand-plum tracking-wider border border-brand-plum/10"
-                          >
-                            Luxury Rooms
-                          </span>
-                        </div>
-                        <p
-                          class="text-[11px] text-surface-dark/60 font-medium tracking-wide mt-1"
+                <!-- ==================================================== -->
+                <!-- START: UPDATED NAVBAR AND HERO COMPONENT               -->
+                <!-- ==================================================== -->
+                <div class="nh-home" id="nh-home">
+                  <header class="nh-header">
+                    <div class="nh-container nh-navbar">
+                      <!-- Brand Lockup -->
+                      <a class="nh-brand" href="#nh-home" aria-label="N Hotels home">
+                        <span class="nh-monogram" aria-hidden="true">[N]</span>
+                        <span class="nh-brand-copy">
+                          <span class="nh-brand-name">Hotels</span>
+                          <span class="nh-brand-tagline">Luxury Rooms</span>
+                        </span>
+                      </a>
+
+                      <!-- Mobile Menu Button -->
+                      <button
+                        class="nh-menu-toggle"
+                        type="button"
+                        aria-label=${mobileNavOpen ? "Close navigation" : "Open navigation"}
+                        aria-expanded=${mobileNavOpen ? "true" : "false"}
+                        onClick=${() => setMobileNavOpen(!mobileNavOpen)}
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="1.8"
+                          stroke-linecap="round"
+                          aria-hidden="true"
                         >
-                          Park Centre, Pithapuram
-                        </p>
-                      </div>
+                          <path d=${mobileNavOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+                        </svg>
+                      </button>
+
+                      <!-- Main Navigation Links -->
+                      <nav
+                        class=${`nh-navigation ${mobileNavOpen ? "is-open" : ""}`}
+                        id="nh-navigation"
+                        aria-label="Main navigation"
+                      >
+                        <a class="nh-nav-link" href="#nh-home" aria-current="page" onClick=${() => setMobileNavOpen(false)}>
+                          Home
+                        </a>
+                        <a class="nh-nav-link" href="#rooms" onClick=${() => setMobileNavOpen(false)}>
+                          Rooms
+                        </a>
+                        <a class="nh-nav-link" href="#amenities" onClick=${() => setMobileNavOpen(false)}>
+                          Amenities
+                        </a>
+                        <a class="nh-nav-link" href="#attractions" onClick=${() => setMobileNavOpen(false)}>
+                          Location
+                        </a>
+                        <a class="nh-nav-link" href="#reviews" onClick=${() => setMobileNavOpen(false)}>
+                          Reviews
+                        </a>
+                        <a class="nh-nav-link" href="#location" onClick=${() => setMobileNavOpen(false)}>
+                          Contact
+                        </a>
+
+                        <button
+                          onClick=${() => {
+                            setMobileNavOpen(false);
+                            setView("extranet");
+                          }}
+                          class="text-[11px] font-bold uppercase tracking-wider text-brand-gold border border-brand-gold/40 px-2.5 py-1 rounded bg-black/30 hover:bg-black/50 transition-colors"
+                        >
+                          Desk (${enquiries.length})
+                        </button>
+
+                        <a class="nh-signup" href="#enquire" onClick=${() => setMobileNavOpen(false)}>
+                          Book Now
+                        </a>
+                      </nav>
+                    </div>
+                  </header>
+
+                  <!-- Hero Section -->
+                  <section class="nh-hero" aria-labelledby="nh-hero-title">
+                    <div class="nh-slides" aria-hidden="true">
+                      ${heroSlides.map(
+                        (slideImg, idx) => html`
+                          <img
+                            key=${idx}
+                            class=${`nh-slide ${heroSlide === idx ? "is-active" : ""}`}
+                            src=${slideImg}
+                            alt=""
+                          />
+                        `
+                      )}
                     </div>
 
-                    <!-- Navigation Links -->
-                    <nav
-                      class="hidden lg:flex items-center space-x-8 text-xs font-semibold text-surface-dark/80"
-                    >
-                      <a
-                        href="#overview"
-                        class="hover:text-brand-plum transition-colors"
-                        >Overview</a
-                      >
-                      <a
-                        href="#rooms"
-                        class="hover:text-brand-plum transition-colors"
-                        >Rooms & Tariffs</a
-                      >
-                      <a
-                        href="#amenities"
-                        class="hover:text-brand-plum transition-colors"
-                        >Amenities</a
-                      >
-                      <a
-                        href="#attractions"
-                        class="hover:text-brand-plum transition-colors"
-                        >Attractions & Location</a
-                      >
-                      <a
-                        href="#reviews"
-                        class="hover:text-brand-plum transition-colors"
-                        >Reviews</a
-                      >
-                      <a
-                        href="#location"
-                        class="hover:text-brand-plum transition-colors"
-                        >Location</a
-                      >
-                    </nav>
+                    <div class="nh-shade" aria-hidden="true"></div>
 
-                    <!-- Single Clean Call-to-Action (Removed Duplicate Tariff Box) -->
-                    <div class="hidden sm:flex items-center space-x-4">
-                      <a
-                        href="#enquire"
-                        class="bg-gradient-to-r from-brand-plum to-brand-plumDeep hover:from-brand-plumHover hover:to-brand-plum text-white text-xs font-bold px-5 py-2.5 rounded-lg shadow-sm border border-brand-gold/40 tracking-wider transition-all"
-                      >
-                        Enquire Stay
+                    <div class="nh-container nh-hero-content">
+                      <p class="nh-eyebrow">Welcome to N Hotels</p>
+
+                      <h1 class="nh-title" id="nh-hero-title">
+                        <span>N Hotels -</span>
+                        Park Centre, Pithapuram
+                      </h1>
+
+                      <p class="nh-description">
+                        Enjoy a restful stay with elegant rooms, thoughtful
+                        comforts, and a warm welcome in Pithapuram.
+                      </p>
+
+                      <a class="nh-book" href="#enquire">
+                        <span>Book Now</span>
+                        <span aria-hidden="true">↗</span>
                       </a>
                     </div>
 
-                    <!-- Mobile Menu Trigger -->
-                    <button
-                      onClick=${() => setMobileNavOpen(!mobileNavOpen)}
-                      class="lg:hidden p-2 text-surface-dark/70 hover:text-surface-dark"
-                      aria-label="Toggle Navigation"
-                    >
-                      <svg
-                        class="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d=${mobileNavOpen
-                            ? "M6 18L18 6M6 6l12 12"
-                            : "M4 6h16M4 12h16M4 18h16"}
-                        />
-                      </svg>
-                    </button>
-                  </div>
-
-                  <!-- Mobile Drawer -->
-                  ${mobileNavOpen &&
-                  html`
-                    <div
-                      class="lg:hidden bg-white border-b border-surface-border px-4 py-4 space-y-3 text-xs font-semibold text-surface-dark"
-                    >
-                      <a
-                        href="#overview"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Overview</a
-                      >
-                      <a
-                        href="#rooms"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Rooms & Tariffs</a
-                      >
-                      <a
-                        href="#amenities"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Amenities</a
-                      >
-                      <a
-                        href="#attractions"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Attractions & Location</a
-                      >
-                      <a
-                        href="#reviews"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Reviews</a
-                      >
-                      <a
-                        href="#location"
-                        onClick=${() => setMobileNavOpen(false)}
-                        class="block py-1"
-                        >Location & Contact</a
-                      >
-                      <div
-                        class="pt-3 border-t border-surface-border flex items-center justify-between"
-                      >
-                        <a
-                          href="tel:${HOTEL.phoneRaw}"
-                          class="text-xs font-bold text-surface-dark"
-                          >${HOTEL.phone}</a
-                        >
-                        <a
-                          href="#enquire"
-                          onClick=${() => setMobileNavOpen(false)}
-                          class="bg-brand-plum text-white px-4 py-2 rounded-md font-bold"
-                          >Enquire Stay</a
-                        >
-                      </div>
+                    <!-- Slider Controls -->
+                    <div class="nh-slider-controls" role="group" aria-label="Hotel photographs">
+                      ${heroSlides.map(
+                        (_, idx) => html`
+                          <button
+                            key=${idx}
+                            class="nh-dot"
+                            type="button"
+                            aria-label=${`Show photograph ${idx + 1}`}
+                            aria-pressed=${heroSlide === idx ? "true" : "false"}
+                            onClick=${() => setHeroSlide(idx)}
+                          ></button>
+                        `
+                      )}
                     </div>
-                  `}
-                </header>
+                  </section>
+                </div>
+                <!-- END: Updated navbar and hero -->
 
-                <!-- ==================================================== -->
-                <!-- 3. HERO OVERVIEW: CLEAN, UNCLUTTERED PROPERTY HEADER -->
-                <!-- ==================================================== -->
+                <!-- 250 METRES TEMPLE SECTION -->
+                <section class="nh-temple-section">
+                  <div class="max-w-4xl mx-auto px-4">
+                    <span class="nh-temple-kicker">LOCATED IN PARK CENTRE, PITHAPURAM</span>
+                    <h2 class="nh-temple-title">250 metres to Sri Pada Sri Vallabha Temple</h2>
+                    <p class="nh-temple-desc">
+                      Conveniently located just 250 metres from Sri Pada Sri Vallabha Temple and close to Puruhutika Devi Shakti Peetham, [N] Hotel's offers serene 3rd-floor peace, effortless elevator access, and exceptional guest care.
+                    </p>
+                  </div>
+                </section>
+
                 <section id="overview" class="pt-8 pb-10">
                   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- Clean Property Header (Removed Duplicated Temple Buttons from Hero) -->
-                    <div
-                      class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-surface-border mb-6"
-                    >
-                      <div>
-                        <div
-                          class="flex items-center space-x-2 text-xs text-surface-dark/60 mb-2"
-                        >
-                          <span
-                            class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200"
-                          >
-                            ★ 4.5 / 5
-                          </span>
-                          <span>Very Good (142 verified ratings)</span>
-                          <span>•</span>
-                          <span>Verified Hotel Property</span>
-                        </div>
-
-                        <h1
-                          class="text-3xl sm:text-4xl font-extrabold text-surface-dark tracking-tight"
-                        >
-                          [N] Hotel's Luxury Rooms
-                        </h1>
-
-                        <p
-                          class="text-xs sm:text-sm text-surface-dark/70 mt-2 max-w-2xl leading-relaxed"
-                        >
-                          3rd Floor, VVS Grand, Canara Bank Premises, Park
-                          Centre, Pithapuram, Andhra Pradesh 533450. Elevated
-                          peacefully above town traffic, providing clean
-                          accommodations with elevator access, 24/7 hot water,
-                          and dedicated guest care.
-                        </p>
-                      </div>
-
-                      <!-- Direct Tariff Presentation -->
-                      <div
-                        class="lg:text-right shrink-0 luxury-card p-5 rounded-xl border border-surface-border"
-                      >
-                        <p
-                          class="text-[11px] font-bold uppercase tracking-wider text-brand-goldDark"
-                        >
-                          Direct Tariff Guarantee
-                        </p>
-                        <div
-                          class="flex items-baseline lg:justify-end space-x-1.5 mt-1"
-                        >
-                          <span class="text-3xl font-extrabold text-brand-plum"
-                            >₹1,800</span
-                          >
-                          <span class="text-xs text-surface-dark/60"
-                            >/ 24 hours</span
-                          >
-                        </div>
-                        <p class="text-[11px] text-surface-dark/50 mt-0.5">
-                          Flat Net Tariff • Zero Hidden Booking Fees • No Extra
-                          Taxes
-                        </p>
-                        <p
-                          class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded inline-block mt-2 border border-emerald-200"
-                        >
-                          Save ₹300 vs Goibibo & ₹200 vs MakeMyTrip
-                        </p>
-                      </div>
-                    </div>
-
-                    <!-- ==================================================== -->
-                    <!-- 4. ARCHITECTURAL PHOTO MOSAIC GRID (5-IMAGE LAYOUT)  -->
-                    <!-- ==================================================== -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-8">
-                      <!-- Main Showcase (Span 2 cols, 2 rows) -->
-                      <div
-                        class="md:col-span-2 md:row-span-2 relative rounded-xl overflow-hidden aspect-[16/10] md:aspect-auto bg-slate-200 group"
-                      >
-                        <img
-                          src=${PROPERTY_IMAGES.mainBedroom}
-                          alt="[N] Hotel's Luxury Room Main Bedroom"
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
-                          class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-                        ></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                          <p
-                            class="text-xs font-mono uppercase tracking-wider text-brand-gold font-semibold"
-                          >
-                            189 sq. ft • King Bed
-                          </p>
-                          <p class="text-base font-bold mt-0.5">
-                            Deluxe AC Room
-                          </p>
-                        </div>
-                      </div>
-
-                      <!-- Photo 2: Bathroom Geyser -->
-                      <div
-                        class="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-200 group"
-                      >
-                        <img
-                          src=${PROPERTY_IMAGES.bathroomGeyser}
-                          alt="Ensuite Bathroom with 24/7 Geyser"
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
-                          class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
-                        ></div>
-                        <span
-                          class="absolute bottom-2 left-2 bg-black/75 text-white text-[10px] font-medium px-2 py-0.5 rounded"
-                        >
-                          24/7 Hot Water Geyser
-                        </span>
-                      </div>
-
-                      <!-- Photo 3: Executive Bed -->
-                      <div
-                        class="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-200 group"
-                      >
-                        <img
-                          src=${PROPERTY_IMAGES.executiveBed}
-                          alt="Executive Family Suite Layout"
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
-                          class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
-                        ></div>
-                        <span
-                          class="absolute bottom-2 left-2 bg-black/75 text-white text-[10px] font-medium px-2 py-0.5 rounded"
-                        >
-                          Executive Suite (260 sq.ft)
-                        </span>
-                      </div>
-
-                      <!-- Photo 4: 3rd Floor Lobby -->
-                      <div
-                        class="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-200 group"
-                      >
-                        <img
-                          src=${PROPERTY_IMAGES.livingLobby}
-                          alt="3rd Floor Elevator Access & Quiet Corridor"
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
-                          class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
-                        ></div>
-                        <span
-                          class="absolute bottom-2 left-2 bg-black/75 text-white text-[10px] font-medium px-2 py-0.5 rounded"
-                        >
-                          Wardrobe & Desk Station
-                        </span>
-                      </div>
-
-                      <!-- Photo 5: Executive Suite Angle -->
-                      <div
-                        class="relative rounded-xl overflow-hidden aspect-[16/10] bg-slate-200 group"
-                      >
-                        <img
-                          src=${PROPERTY_IMAGES.templeTown}
-                          alt="Room Interior and Lighting"
-                          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                        <div
-                          class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"
-                        ></div>
-                        <span
-                          class="absolute bottom-2 left-2 bg-black/75 text-white text-[10px] font-medium px-2 py-0.5 rounded"
-                        >
-                          Modern Interior & Cove Lighting
-                        </span>
-                      </div>
-                    </div>
-
                     <!-- ==================================================== -->
                     <!-- 5. SLEEK HORIZONTAL SEARCH & BOOKING BAR             -->
                     <!-- ==================================================== -->
