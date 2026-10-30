@@ -145,7 +145,6 @@
         rates: {
           deluxeDirect: 1800,
           executiveDirect: 2500,
-          gstRate: 0.12,
           deluxeOta: 2100,
           executiveOta: 2950,
           deluxeSavings: 300,
@@ -512,7 +511,7 @@
           dates: "Nov 4 to Nov 6 (2 nights)",
           slot: "07:00 AM (24-Hour Cycle)",
           guests: "2 Adults",
-          totalAmount: "₹4,032 (Incl. GST)",
+          totalAmount: "₹3,600 (Net Direct Tariff)",
           status: "Confirmed",
           note: "Early morning darshan at Sri Pada Vallabha temple. Confirmed 3rd floor quiet room.",
         },
@@ -524,7 +523,7 @@
           dates: "Nov 5 to Nov 6 (1 night)",
           slot: "11:00 AM (Standard Cycle)",
           guests: "3 Adults",
-          totalAmount: "₹2,800 (Incl. GST)",
+          totalAmount: "₹2,500 (Net Direct Tariff)",
           status: "New",
           note: "Family of 3 visiting Puruhutika Devi Peetham. Requested auto assistance from Park Centre.",
         },
@@ -536,7 +535,7 @@
           dates: "Nov 8 to Nov 10 (2 nights)",
           slot: "07:00 AM (24-Hour Cycle)",
           guests: "1 Adult",
-          totalAmount: "₹4,032 (Incl. GST)",
+          totalAmount: "₹3,600 (Net Direct Tariff)",
           status: "Contacted",
           note: "Single guest visiting for sacred parayana. Arriving via Samalkot Station.",
         },
@@ -602,8 +601,7 @@
 
         const baseNightRate = dailyRate;
         const subtotal = dailyRate * bookingNights;
-        const gstAmount = Math.round(subtotal * HOTEL.rates.gstRate);
-        const grandTotal = subtotal + gstAmount;
+        const grandTotal = subtotal;
         const directSavings = (isExecutive ? 450 : 300) * bookingNights;
 
         // Handle Enquiry Submission (In-Memory React State)
@@ -623,7 +621,7 @@
             dates: `${formData.checkInDate} to ${formData.checkOutDate} (${bookingNights} night${bookingNights > 1 ? "s" : ""})`,
             slot: formData.checkInSlot,
             guests: formData.guestsCount,
-            totalAmount: `₹${grandTotal.toLocaleString("en-IN")} (Incl. GST)`,
+            totalAmount: `₹${grandTotal.toLocaleString("en-IN")}`,
             status: "New",
             note:
               formData.specialRequests ||
@@ -768,7 +766,9 @@
                             Luxury Rooms
                           </span>
                         </div>
-                        <p class="text-[11px] text-surface-dark/60 font-medium tracking-wide mt-1">
+                        <p
+                          class="text-[11px] text-surface-dark/60 font-medium tracking-wide mt-1"
+                        >
                           Park Centre, Pithapuram
                         </p>
                       </div>
@@ -965,7 +965,8 @@
                           >
                         </div>
                         <p class="text-[11px] text-surface-dark/50 mt-0.5">
-                          + 12% GST (₹216) • Zero Hidden Booking Fees
+                          Flat Net Tariff • Zero Hidden Booking Fees • No Extra
+                          Taxes
                         </p>
                         <p
                           class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded inline-block mt-2 border border-emerald-200"
@@ -1335,7 +1336,7 @@
                                 >
                               </div>
                               <span class="text-[10px] text-surface-dark/50"
-                                >+ 12% GST (₹216)</span
+                                >Net Direct Tariff • No Extra Taxes</span
                               >
                             </div>
 
@@ -1385,8 +1386,8 @@
                                 </span>
                               </div>
                               <p class="text-xs text-surface-dark/60 mt-1">
-                                Spacious room designed for family stays
-                                with extra bedding and wardrobe storage.
+                                Spacious room designed for family stays with
+                                extra bedding and wardrobe storage.
                               </p>
 
                               <!-- Inclusions -->
@@ -1478,7 +1479,7 @@
                                 >
                               </div>
                               <span class="text-[10px] text-surface-dark/50"
-                                >+ 12% GST (₹300)</span
+                                >Net Direct Tariff • No Extra Taxes</span
                               >
                             </div>
 
@@ -1964,9 +1965,7 @@
                                       })}
                                     class="w-full px-2.5 py-1.5 rounded-lg border border-surface-border text-xs text-surface-dark"
                                   >
-                                    <option
-                                      value="07:00 AM (24-Hour Cycle)"
-                                    >
+                                    <option value="07:00 AM (24-Hour Cycle)">
                                       07:00 AM (24-Hour Cycle)
                                     </option>
                                     <option value="11:00 AM (Standard Cycle)">
@@ -2050,24 +2049,23 @@
                                     >${formData.roomType.split(" (")[0]}</span
                                   >
                                   <span class="font-semibold text-surface-dark"
-                                    >₹${baseNightRate} × ${bookingNights}
-                                    night${bookingNights > 1 ? "s" : ""}</span
+                                    >${`₹${baseNightRate.toLocaleString("en-IN")} × ${bookingNights} ${bookingNights > 1 ? "nights" : "night"}`}</span
                                   >
                                 </div>
                                 <div class="flex justify-between">
                                   <span class="text-surface-dark/60"
-                                    >Base Room Rate</span
+                                    >Duration</span
                                   >
                                   <span class="font-semibold text-surface-dark"
-                                    >₹${subtotal.toLocaleString("en-IN")}</span
+                                    >${bookingNights} × 24-Hour Stay Cycle</span
                                   >
                                 </div>
                                 <div class="flex justify-between">
                                   <span class="text-surface-dark/60"
-                                    >GST (12%)</span
+                                    >Guests Included</span
                                   >
                                   <span class="font-semibold text-surface-dark"
-                                    >₹${gstAmount.toLocaleString("en-IN")}</span
+                                    >${formData.guestsCount}</span
                                   >
                                 </div>
                                 <div
@@ -2091,8 +2089,7 @@
                               >
                                 <p class="font-bold">Direct Rate Benefit</p>
                                 <p class="text-[11px] mt-0.5">
-                                  You save approximately ₹${directSavings}
-                                  compared to online travel portal tariffs.
+                                  ${`You save approximately ₹${directSavings} compared to online travel portal tariffs.`}
                                 </p>
                               </div>
 
@@ -2922,7 +2919,7 @@
                           dates: "Nov 12 to Nov 14 (2 nights)",
                           slot: "07:00 AM (24-Hour Cycle)",
                           guests: "2 Adults",
-                          totalAmount: "₹3,248 (Incl. GST)",
+                          totalAmount: "₹3,600 (Net Direct Tariff)",
                           status: "New",
                           note: "Simulated test record.",
                         };
