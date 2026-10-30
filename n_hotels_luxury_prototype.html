@@ -102,300 +102,401 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #8f6e32;
       }
-    
-    /* Scoped styles for .nh-home (Navbar & Hero) */
-    .nh-home {
-      --nh-gold: #d9b977;
-      --nh-gold-light: #ebd4a5;
-      --nh-white: #ffffff;
-      position: relative;
-      isolation: isolate;
-      color: var(--nh-white);
-      background: #302824;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    .nh-home, .nh-home * { box-sizing: border-box; }
-    .nh-home a { color: inherit; text-decoration: none; }
-    .nh-home button { font: inherit; cursor: pointer; }
-    .nh-home :is(a, button):focus-visible { outline: 3px solid var(--nh-gold-light); outline-offset: 5px; }
-    .nh-home .nh-container { width: min(1180px, calc(100% - 60px)); margin-inline: auto; }
 
-    /* NAVBAR */
-    .nh-home .nh-header {
-      position: absolute;
-      inset: 0 0 auto;
-      z-index: 20;
-      border-bottom: 1px solid rgb(255 255 255 / 15%);
-      background: linear-gradient(to bottom, rgb(20 16 13 / 65%), transparent);
-    }
-    .nh-home .nh-navbar {
-      min-height: 94px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-    .nh-home .nh-brand { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .nh-home .nh-monogram {
-      color: var(--nh-gold);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 38px;
-      line-height: 1;
-      letter-spacing: -3px;
-      padding-right: 3px;
-      font-weight: 700;
-    }
-    .nh-home .nh-brand-copy { display: grid; gap: 2px; }
-    .nh-home .nh-brand-name {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 26px;
-      font-style: italic;
-      line-height: 1;
-      color: #ffffff;
-    }
-    .nh-home .nh-brand-tagline {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--nh-gold);
-      font-weight: 600;
-    }
-    .nh-home .nh-navigation { display: flex; align-items: center; gap: 24px; }
-    .nh-home .nh-nav-link {
-      position: relative;
-      padding-block: 10px;
-      font-size: 14px;
-      color: rgb(255 255 255 / 92%);
-      transition: color 180ms ease;
-    }
-    .nh-home .nh-nav-link:hover, .nh-home .nh-nav-link[aria-current="page"] { color: var(--nh-gold-light); }
-    .nh-home .nh-nav-link[aria-current="page"]::after {
-      content: "";
-      position: absolute;
-      bottom: 4px;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      background: var(--nh-gold);
-    }
-    .nh-home .nh-signup {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      padding: 10px 24px;
-      border: 1px solid var(--nh-gold);
-      border-radius: 30px;
-      background: var(--nh-gold);
-      color: #30251c;
-      font-size: 13px;
-      font-weight: 700;
-      transition: background 180ms ease, transform 180ms ease;
-    }
-    .nh-home .nh-signup:hover { background: var(--nh-gold-light); transform: translateY(-1px); }
-    .nh-home .nh-menu-toggle {
-      display: none;
-      width: 44px;
-      height: 44px;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgb(255 255 255 / 40%);
-      border-radius: 6px;
-      background: rgb(0 0 0 / 25%);
-      color: white;
-    }
-    .nh-home .nh-menu-toggle svg { width: 23px; height: 23px; }
+      /* Scoped styles for .nh-home (Navbar & Hero) */
+      .nh-home {
+        --nh-gold: #d9b977;
+        --nh-gold-light: #ebd4a5;
+        --nh-white: #ffffff;
+        position: relative;
+        isolation: isolate;
+        color: var(--nh-white);
+        background: #302824;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .nh-home,
+      .nh-home * {
+        box-sizing: border-box;
+      }
+      .nh-home a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .nh-home button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .nh-home :is(a, button):focus-visible {
+        outline: 3px solid var(--nh-gold-light);
+        outline-offset: 5px;
+      }
+      .nh-home .nh-container {
+        width: min(1180px, calc(100% - 60px));
+        margin-inline: auto;
+      }
 
-    /* HERO */
-    .nh-home .nh-hero {
-      position: relative;
-      display: flex;
-      align-items: center;
-      min-height: 620px;
-      min-height: clamp(540px, 78svh, 800px);
-      overflow: hidden;
-    }
-    .nh-home .nh-slides, .nh-home .nh-shade { position: absolute; inset: 0; pointer-events: none; }
-    .nh-home .nh-slide {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: 0;
-      transition: opacity 650ms ease;
-    }
-    .nh-home .nh-slide.is-active { opacity: 1; }
-    .nh-home .nh-shade {
-      background:
-        linear-gradient(90deg, rgb(19 15 13 / 82%) 0%, rgb(19 15 13 / 50%) 42%, rgb(19 15 13 / 15%) 100%),
-        linear-gradient(0deg, rgb(19 15 13 / 35%), transparent 40%);
-    }
-    .nh-home .nh-hero-content {
-      position: relative;
-      z-index: 1;
-      padding-top: 130px;
-      padding-bottom: 110px;
-    }
-    .nh-home .nh-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 20px;
-      color: var(--nh-gold-light);
-      font-size: 11px;
-      line-height: 1.6;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .nh-home .nh-eyebrow::before {
-      content: "";
-      width: 34px;
-      height: 1px;
-      flex-shrink: 0;
-      background: var(--nh-gold);
-    }
-    .nh-home .nh-title {
-      max-width: 680px;
-      margin: 0;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(36px, 4.5vw, 64px);
-      line-height: 1.14;
-      letter-spacing: -1.5px;
-      font-weight: 400;
-      text-wrap: balance;
-      text-shadow: 0 2px 20px rgb(0 0 0 / 30%);
-    }
-    .nh-home .nh-title span { display: block; margin-bottom: 6px; font-style: italic; color: #ffffff; }
-    .nh-home .nh-description {
-      max-width: 440px;
-      margin: 20px 0 28px;
-      color: rgb(255 255 255 / 88%);
-      font-size: 14.5px;
-      line-height: 1.8;
-    }
-    .nh-home .nh-book {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      min-height: 48px;
-      padding: 13px 28px;
-      border: 1px solid var(--nh-gold);
-      border-radius: 4px;
-      background: var(--nh-gold);
-      color: #30251c;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      transition: background 180ms ease, transform 180ms ease;
-    }
-    .nh-home .nh-book:hover { background: var(--nh-gold-light); transform: translateY(-2px); }
-
-    /* SLIDER CONTROLS */
-    .nh-home .nh-slider-controls {
-      position: absolute;
-      z-index: 2;
-      bottom: 28px;
-      left: 50%;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transform: translateX(-50%);
-    }
-    .nh-home .nh-dot {
-      display: grid;
-      place-items: center;
-      width: 30px;
-      height: 34px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      cursor: pointer;
-    }
-    .nh-home .nh-dot::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border: 1px solid rgb(255 255 255 / 75%);
-      border-radius: 50%;
-      background: rgb(255 255 255 / 55%);
-      transition: background 180ms ease, box-shadow 180ms ease;
-    }
-    .nh-home .nh-dot[aria-pressed="true"]::before {
-      border-color: var(--nh-gold);
-      background: var(--nh-gold);
-      box-shadow: 0 0 0 4px rgb(217 185 119 / 25%);
-    }
-
-    /* 250 METRES SECTION */
-    .nh-temple-section {
-      background: #faf8f5;
-      padding: 56px 20px 48px;
-      text-align: center;
-      border-bottom: 1px solid #ebe5de;
-    }
-    .nh-temple-kicker {
-      display: inline-block;
-      color: #8F6E32;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .nh-temple-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(26px, 3.2vw, 40px);
-      color: #181412;
-      font-weight: 700;
-      margin: 0 0 14px;
-      letter-spacing: -0.5px;
-    }
-    .nh-temple-desc {
-      max-width: 640px;
-      margin: 0 auto 30px;
-      color: #5c544e;
-      font-size: 13.5px;
-      line-height: 1.7;
-    }
-
-    @media (max-width: 800px) {
-      .nh-home .nh-container { width: calc(100% - 32px); }
-      .nh-home .nh-navbar { min-height: 80px; }
-      .nh-home .nh-brand-name { font-size: 24px; }
-      .nh-home .nh-monogram { font-size: 34px; }
-      .nh-home .nh-menu-toggle { display: inline-flex; }
-      .nh-home .nh-navigation {
-        display: none;
+      /* NAVBAR */
+      .nh-home .nh-header {
         position: absolute;
-        top: 80px;
+        inset: 0 0 auto;
+        z-index: 20;
+        border-bottom: 1px solid rgb(255 255 255 / 15%);
+        background: linear-gradient(
+          to bottom,
+          rgb(20 16 13 / 65%),
+          transparent
+        );
+      }
+      .nh-home .nh-navbar {
+        min-height: 94px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .nh-home .nh-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+      }
+      .nh-home .nh-monogram {
+        color: var(--nh-gold);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 38px;
+        line-height: 1;
+        letter-spacing: -3px;
+        padding-right: 3px;
+        font-weight: 700;
+      }
+      .nh-home .nh-brand-copy {
+        display: grid;
+        gap: 2px;
+      }
+      .nh-home .nh-brand-name {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 26px;
+        font-style: italic;
+        line-height: 1;
+        color: #ffffff;
+      }
+      .nh-home .nh-brand-tagline {
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--nh-gold);
+        font-weight: 600;
+      }
+      .nh-home .nh-navigation {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .nh-home .nh-nav-link {
+        position: relative;
+        padding-block: 10px;
+        font-size: 14px;
+        color: rgb(255 255 255 / 92%);
+        transition: color 180ms ease;
+      }
+      .nh-home .nh-nav-link:hover,
+      .nh-home .nh-nav-link[aria-current="page"] {
+        color: var(--nh-gold-light);
+      }
+      .nh-home .nh-nav-link[aria-current="page"]::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
         left: 0;
-        right: 0;
-        padding: 20px;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 6px;
-        border-top: 1px solid rgb(255 255 255 / 12%);
-        background: #241d1a;
-        box-shadow: 0 15px 25px rgb(0 0 0 / 30%);
+        width: 18px;
+        height: 2px;
+        background: var(--nh-gold);
       }
-      .nh-home .nh-navigation.is-open { display: flex; }
-      .nh-home .nh-nav-link { padding: 12px 8px; }
-      .nh-home .nh-nav-link[aria-current="page"]::after { left: 8px; }
-      .nh-home .nh-signup { align-self: flex-start; margin-top: 10px; }
-      .nh-home .nh-hero { min-height: 560px; }
-      .nh-home .nh-slide { object-position: 60% center; }
-      .nh-home .nh-shade {
-        background: linear-gradient(90deg, rgb(19 15 13 / 85%), rgb(19 15 13 / 45%));
+      .nh-home .nh-signup {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 10px 24px;
+        border: 1px solid var(--nh-gold);
+        border-radius: 30px;
+        background: var(--nh-gold);
+        color: #30251c;
+        font-size: 13px;
+        font-weight: 700;
+        transition:
+          background 180ms ease,
+          transform 180ms ease;
       }
-      .nh-home .nh-hero-content { padding-top: 120px; padding-bottom: 90px; }
-      .nh-home .nh-title { max-width: 520px; letter-spacing: -1px; }
-      .nh-home .nh-description { max-width: 350px; font-size: 13.5px; }
-    }
+      .nh-home .nh-signup:hover {
+        background: var(--nh-gold-light);
+        transform: translateY(-1px);
+      }
+      .nh-home .nh-menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgb(255 255 255 / 40%);
+        border-radius: 6px;
+        background: rgb(0 0 0 / 25%);
+        color: white;
+      }
+      .nh-home .nh-menu-toggle svg {
+        width: 23px;
+        height: 23px;
+      }
 
+      /* HERO */
+      .nh-home .nh-hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 620px;
+        min-height: clamp(540px, 78svh, 800px);
+        overflow: hidden;
+      }
+      .nh-home .nh-slides,
+      .nh-home .nh-shade {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .nh-home .nh-slide {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0;
+        transition: opacity 650ms ease;
+      }
+      .nh-home .nh-slide.is-active {
+        opacity: 1;
+      }
+      .nh-home .nh-shade {
+        background:
+          linear-gradient(
+            90deg,
+            rgb(19 15 13 / 82%) 0%,
+            rgb(19 15 13 / 50%) 42%,
+            rgb(19 15 13 / 15%) 100%
+          ),
+          linear-gradient(0deg, rgb(19 15 13 / 35%), transparent 40%);
+      }
+      .nh-home .nh-hero-content {
+        position: relative;
+        z-index: 1;
+        padding-top: 130px;
+        padding-bottom: 110px;
+      }
+      .nh-home .nh-eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0 0 20px;
+        color: var(--nh-gold-light);
+        font-size: 11px;
+        line-height: 1.6;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .nh-home .nh-eyebrow::before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        flex-shrink: 0;
+        background: var(--nh-gold);
+      }
+      .nh-home .nh-title {
+        max-width: 680px;
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(36px, 4.5vw, 64px);
+        line-height: 1.14;
+        letter-spacing: -1.5px;
+        font-weight: 400;
+        text-wrap: balance;
+        text-shadow: 0 2px 20px rgb(0 0 0 / 30%);
+      }
+      .nh-home .nh-title span {
+        display: block;
+        margin-bottom: 6px;
+        font-style: italic;
+        color: #ffffff;
+      }
+      .nh-home .nh-description {
+        max-width: 440px;
+        margin: 20px 0 28px;
+        color: rgb(255 255 255 / 88%);
+        font-size: 14.5px;
+        line-height: 1.8;
+      }
+      .nh-home .nh-book {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        min-height: 48px;
+        padding: 13px 28px;
+        border: 1px solid var(--nh-gold);
+        border-radius: 4px;
+        background: var(--nh-gold);
+        color: #30251c;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        transition:
+          background 180ms ease,
+          transform 180ms ease;
+      }
+      .nh-home .nh-book:hover {
+        background: var(--nh-gold-light);
+        transform: translateY(-2px);
+      }
+
+      /* SLIDER CONTROLS */
+      .nh-home .nh-slider-controls {
+        position: absolute;
+        z-index: 2;
+        bottom: 28px;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transform: translateX(-50%);
+      }
+      .nh-home .nh-dot {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 34px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+      .nh-home .nh-dot::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border: 1px solid rgb(255 255 255 / 75%);
+        border-radius: 50%;
+        background: rgb(255 255 255 / 55%);
+        transition:
+          background 180ms ease,
+          box-shadow 180ms ease;
+      }
+      .nh-home .nh-dot[aria-pressed="true"]::before {
+        border-color: var(--nh-gold);
+        background: var(--nh-gold);
+        box-shadow: 0 0 0 4px rgb(217 185 119 / 25%);
+      }
+
+      /* 250 METRES SECTION */
+      .nh-temple-section {
+        background: #faf8f5;
+        padding: 56px 20px 48px;
+        text-align: center;
+        border-bottom: 1px solid #ebe5de;
+      }
+      .nh-temple-kicker {
+        display: inline-block;
+        color: #8f6e32;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .nh-temple-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(26px, 3.2vw, 40px);
+        color: #181412;
+        font-weight: 700;
+        margin: 0 0 14px;
+        letter-spacing: -0.5px;
+      }
+      .nh-temple-desc {
+        max-width: 640px;
+        margin: 0 auto 30px;
+        color: #5c544e;
+        font-size: 13.5px;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 800px) {
+        .nh-home .nh-container {
+          width: calc(100% - 32px);
+        }
+        .nh-home .nh-navbar {
+          min-height: 80px;
+        }
+        .nh-home .nh-brand-name {
+          font-size: 24px;
+        }
+        .nh-home .nh-monogram {
+          font-size: 34px;
+        }
+        .nh-home .nh-menu-toggle {
+          display: inline-flex;
+        }
+        .nh-home .nh-navigation {
+          display: none;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          right: 0;
+          padding: 20px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 6px;
+          border-top: 1px solid rgb(255 255 255 / 12%);
+          background: #241d1a;
+          box-shadow: 0 15px 25px rgb(0 0 0 / 30%);
+        }
+        .nh-home .nh-navigation.is-open {
+          display: flex;
+        }
+        .nh-home .nh-nav-link {
+          padding: 12px 8px;
+        }
+        .nh-home .nh-nav-link[aria-current="page"]::after {
+          left: 8px;
+        }
+        .nh-home .nh-signup {
+          align-self: flex-start;
+          margin-top: 10px;
+        }
+        .nh-home .nh-hero {
+          min-height: 560px;
+        }
+        .nh-home .nh-slide {
+          object-position: 60% center;
+        }
+        .nh-home .nh-shade {
+          background: linear-gradient(
+            90deg,
+            rgb(19 15 13 / 85%),
+            rgb(19 15 13 / 45%)
+          );
+        }
+        .nh-home .nh-hero-content {
+          padding-top: 120px;
+          padding-bottom: 90px;
+        }
+        .nh-home .nh-title {
+          max-width: 520px;
+          letter-spacing: -1px;
+        }
+        .nh-home .nh-description {
+          max-width: 350px;
+          font-size: 13.5px;
+        }
+      }
     </style>
   </head>
   <body class="selection:bg-brand-plum selection:text-white">
@@ -945,7 +1046,7 @@
         };
 
         // Construct WhatsApp URL
-                const heroSlides = [
+        const heroSlides = [
           PROPERTY_IMAGES.mainBedroom,
           PROPERTY_IMAGES.executiveBed,
           PROPERTY_IMAGES.bathroomGeyser,
@@ -1047,7 +1148,11 @@
                   <header class="nh-header">
                     <div class="nh-container nh-navbar">
                       <!-- Brand Lockup -->
-                      <a class="nh-brand" href="#nh-home" aria-label="N Hotels home">
+                      <a
+                        class="nh-brand"
+                        href="#nh-home"
+                        aria-label="N Hotels home"
+                      >
                         <span class="nh-monogram" aria-hidden="true">[N]</span>
                         <span class="nh-brand-copy">
                           <span class="nh-brand-name">Hotels</span>
@@ -1059,7 +1164,9 @@
                       <button
                         class="nh-menu-toggle"
                         type="button"
-                        aria-label=${mobileNavOpen ? "Close navigation" : "Open navigation"}
+                        aria-label=${mobileNavOpen
+                          ? "Close navigation"
+                          : "Open navigation"}
                         aria-expanded=${mobileNavOpen ? "true" : "false"}
                         onClick=${() => setMobileNavOpen(!mobileNavOpen)}
                       >
@@ -1071,7 +1178,11 @@
                           stroke-linecap="round"
                           aria-hidden="true"
                         >
-                          <path d=${mobileNavOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}></path>
+                          <path
+                            d=${mobileNavOpen
+                              ? "M6 18L18 6M6 6l12 12"
+                              : "M4 6h16M4 12h16M4 18h16"}
+                          ></path>
                         </svg>
                       </button>
 
@@ -1081,22 +1192,47 @@
                         id="nh-navigation"
                         aria-label="Main navigation"
                       >
-                        <a class="nh-nav-link" href="#nh-home" aria-current="page" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#nh-home"
+                          aria-current="page"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Home
                         </a>
-                        <a class="nh-nav-link" href="#rooms" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#rooms"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Rooms
                         </a>
-                        <a class="nh-nav-link" href="#amenities" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#amenities"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Amenities
                         </a>
-                        <a class="nh-nav-link" href="#attractions" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#attractions"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Location
                         </a>
-                        <a class="nh-nav-link" href="#reviews" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#reviews"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Reviews
                         </a>
-                        <a class="nh-nav-link" href="#location" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-nav-link"
+                          href="#location"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Contact
                         </a>
 
@@ -1110,7 +1246,11 @@
                           Desk (${enquiries.length})
                         </button>
 
-                        <a class="nh-signup" href="#enquire" onClick=${() => setMobileNavOpen(false)}>
+                        <a
+                          class="nh-signup"
+                          href="#enquire"
+                          onClick=${() => setMobileNavOpen(false)}
+                        >
                           Book Now
                         </a>
                       </nav>
@@ -1128,7 +1268,7 @@
                             src=${slideImg}
                             alt=""
                           />
-                        `
+                        `,
                       )}
                     </div>
 
@@ -1154,7 +1294,11 @@
                     </div>
 
                     <!-- Slider Controls -->
-                    <div class="nh-slider-controls" role="group" aria-label="Hotel photographs">
+                    <div
+                      class="nh-slider-controls"
+                      role="group"
+                      aria-label="Hotel photographs"
+                    >
                       ${heroSlides.map(
                         (_, idx) => html`
                           <button
@@ -1165,7 +1309,7 @@
                             aria-pressed=${heroSlide === idx ? "true" : "false"}
                             onClick=${() => setHeroSlide(idx)}
                           ></button>
-                        `
+                        `,
                       )}
                     </div>
                   </section>
@@ -1175,10 +1319,17 @@
                 <!-- 250 METRES TEMPLE SECTION -->
                 <section class="nh-temple-section">
                   <div class="max-w-4xl mx-auto px-4">
-                    <span class="nh-temple-kicker">LOCATED IN PARK CENTRE, PITHAPURAM</span>
-                    <h2 class="nh-temple-title">250 metres to Sri Pada Sri Vallabha Temple</h2>
+                    <span class="nh-temple-kicker"
+                      >LOCATED IN PARK CENTRE, PITHAPURAM</span
+                    >
+                    <h2 class="nh-temple-title">
+                      250 metres to Sri Pada Sri Vallabha Temple
+                    </h2>
                     <p class="nh-temple-desc">
-                      Conveniently located just 250 metres from Sri Pada Sri Vallabha Temple and close to Puruhutika Devi Shakti Peetham, [N] Hotel's offers serene 3rd-floor peace, effortless elevator access, and exceptional guest care.
+                      Conveniently located just 250 metres from Sri Pada Sri
+                      Vallabha Temple and close to Puruhutika Devi Shakti
+                      Peetham, [N] Hotel's offers serene 3rd-floor peace,
+                      effortless elevator access, and exceptional guest care.
                     </p>
                   </div>
                 </section>
