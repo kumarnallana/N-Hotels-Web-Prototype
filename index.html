@@ -600,6 +600,7 @@
           }
         }, [isExecutive, formData.guestsCount]);
 
+        const baseNightRate = dailyRate;
         const subtotal = dailyRate * bookingNights;
         const gstAmount = Math.round(subtotal * HOTEL.rates.gstRate);
         const grandTotal = subtotal + gstAmount;
