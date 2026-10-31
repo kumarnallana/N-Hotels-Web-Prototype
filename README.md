@@ -80,3 +80,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 * **Building Floor**: 3rd Floor of VVS Grand above Canara Bank with dedicated elevator access.
 * **Climate & Utilities**: Whisper-quiet split air conditioning, 24/7 geyser hot water in ensuite marble bathrooms.
 * **Pricing Guarantee**: Direct rates guaranteed with zero hidden fees, zero booking commissions, and zero extra GST.
+
