@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Front Office Desk — [N] Hotel's Enquiry Queue</title>
+    <meta
+      name="description"
+      content="Internal front-office enquiry queue for [N] Hotel's. Demonstration view: records are held in this browser only."
+    />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#1a1513" />
+    <link rel="icon" href="assets/img/brand-logo.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/desk.css" />
+  </head>
+
+  <body class="desk">
+    <a class="skip-link" href="#queue">Skip to the enquiry queue</a>
+
+    <header class="desk-bar">
+      <div class="wrap desk-bar__inner">
+        <div class="desk-bar__id">
+          <img
+            src="assets/img/brand-logo.jpg"
+            alt=""
+            width="40"
+            height="40"
+            class="brand__mark"
+          />
+          <div class="stack stack--tight">
+            <b>Front office desk</b>
+            <span id="deskSub"></span>
+          </div>
+        </div>
+        <div class="desk-bar__actions">
+          <a class="btn btn--outline btn--sm" href="index.html"
+            >&larr; Guest website</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap desk-main">
+      <section class="desk-head" aria-labelledby="desk-title">
+        <div class="stack stack--tight">
+          <p class="eyebrow">Reception &middot; live queue</p>
+          <h1 id="desk-title">Guest enquiries</h1>
+          <p class="lede" id="deskNote"></p>
+        </div>
+        <div class="cluster">
+          <label class="field__label" for="statusFilter">Filter</label>
+          <select class="field__control desk-filter" id="statusFilter">
+            <option value="all">All records</option>
+            <option value="New">Needs a call</option>
+            <option value="Contacted">Contacted</option>
+            <option value="Confirmed">Confirmed</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="kpis" id="kpis" aria-label="Queue summary"></section>
+
+      <section class="card queue" aria-labelledby="queue-h" id="queue">
+        <div class="queue__head">
+          <h2 id="queue-h" class="landmark__name">Active enquiries</h2>
+          <span class="amenity__desc" id="queueCount"></span>
+        </div>
+
+        <div class="queue__body">
+          <table class="queue__table" id="queueTable">
+            <caption class="visually-hidden">
+              Enquiries received through the guest website and the seeded
+              demonstration records
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Ref</th>
+                <th scope="col">Guest</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Room &amp; dates</th>
+                <th scope="col">Arrival</th>
+                <th scope="col">Total</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="ta-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="queueBody"></tbody>
+          </table>
+
+          <ul class="queue__cards" id="queueCards"></ul>
+
+          <p class="queue__empty" id="queueEmpty" hidden>
+            No records match this filter.
+          </p>
+        </div>
+
+        <div class="queue__foot">
+          <span
+            >Demonstration data. Records live in this browser's local storage
+            and are never sent anywhere.</span
+          >
+          <div class="cluster">
+            <button class="btn btn--quiet btn--sm" type="button" id="addDemo">
+              Add test record
+            </button>
+            <button class="btn btn--outline btn--sm" type="button" id="resetQueue">
+              Reset to seed
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span class="toast__dot" aria-hidden="true"></span>
+      <p id="toastText"></p>
+      <button
+        class="toast__dismiss"
+        type="button"
+        id="toastDismiss"
+        aria-label="Dismiss notification"
+      >
+        &#10005;
+      </button>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/desk.js"></script>
+  </body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive harness</title>
+    <style>
+      body { font: 12px/1.4 monospace; margin: 0; padding: 12px; }
+      #out { white-space: pre; }
+    </style>
+  </head>
+  <body>
+    <div id="out">running…</div>
+    <div id="stage"></div>
+    <script>
+      const WIDTHS = [320, 360, 375, 414, 480, 600, 768, 834, 900, 1024, 1280, 1440, 1920];
+      const PAGES = ["index.html", "desk.html"];
+
+      function frame(page, w) {
+        return new Promise((resolve) => {
+          const f = document.createElement("iframe");
+          f.style.cssText = `width:${w}px;height:900px;border:0;position:absolute;left:-99999px;top:0`;
+          f.src = page;
+          f.onload = () => setTimeout(() => resolve(f), 260);
+          document.getElementById("stage").appendChild(f);
+        });
+      }
+
+      function audit(doc, w) {
+        const de = doc.documentElement;
+        const issues = [];
+        const limit = de.clientWidth;
+
+        if (de.scrollWidth > limit + 1)
+          issues.push(`H-OVERFLOW ${de.scrollWidth}>${limit}`);
+
+        // any element sticking out of the viewport horizontally
+        const bad = [];
+        doc.querySelectorAll("body *").forEach((el) => {
+          const cs = getComputedStyle(el);
+          if (cs.display === "none" || cs.visibility === "hidden") return;
+          const r = el.getBoundingClientRect();
+          if (r.width === 0 || r.height === 0) return;
+          if (r.right > limit + 1.5 || r.left < -1.5) {
+            const tag = el.tagName.toLowerCase() + (el.className ? "." + String(el.className).split(" ")[0] : "");
+            bad.push(`${tag}[${Math.round(r.left)}..${Math.round(r.right)}]`);
+          }
+        });
+        if (bad.length) issues.push("OUT: " + [...new Set(bad)].slice(0, 6).join(" "));
+
+        // touch targets that are too small AND interactive
+        const small = [];
+        doc.querySelectorAll("a[href], button, select, input").forEach((el) => {
+          const cs = getComputedStyle(el);
+          if (cs.display === "none" || !el.getClientRects().length) return;
+          const r = el.getBoundingClientRect();
+          if (r.width < 24 || r.height < 26) {
+            small.push(`${el.tagName.toLowerCase()}.${String(el.className||"").split(" ")[0]}=${Math.round(r.width)}x${Math.round(r.height)}`);
+          }
+        });
+        if (small.length) issues.push("SMALL-TAP: " + [...new Set(small)].slice(0, 6).join(" "));
+
+        // text clipped by its own box
+        const clipped = [];
+        doc.querySelectorAll("h1,h2,h3,p,span,a,button,td,th,label,dd,dt").forEach((el) => {
+          if (el.scrollHeight > el.clientHeight + 3 && getComputedStyle(el).overflow !== "visible") {
+            clipped.push(el.tagName.toLowerCase() + "." + String(el.className).split(" ")[0]);
+          }
+        });
+        if (clipped.length) issues.push("CLIPPED: " + [...new Set(clipped)].slice(0, 5).join(" "));
+
+        return {
+          scrollW: de.scrollWidth,
+          clientW: de.clientWidth,
+          cols: doc.querySelectorAll(".grid-fluid").length,
+          issues,
+        };
+      }
+
+      (async () => {
+        const lines = [];
+        for (const page of PAGES) {
+          lines.push(`\n===== ${page} =====`);
+          for (const w of WIDTHS) {
+            const f = await frame(page, w);
+            const res = audit(f.contentDocument, w);
+            const flag = res.issues.length ? "  <-- " : "";
+            lines.push(`${String(w).padStart(4)}px  sw=${res.scrollW} cw=${res.clientW}${flag}`);
+            res.issues.forEach((i) => lines.push(`        ${i}`));
+            f.remove();
+          }
+        }
+        document.getElementById("out").textContent = lines.join("\n");
+        window.__DONE__ = true;
+      })();
+    </script>
+  </body>
+</html>
