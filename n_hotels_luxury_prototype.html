@@ -146,16 +146,16 @@
         background: #8f6e32;
       }
 
-      /* Scoped styles for .nh-home (Navbar & Hero) */
+      /* Scoped styles for .nh-home (Navbar & Hero) - Upgraded for Product UI */
       .nh-home {
-        --nh-gold: #d9b977;
+        --nh-gold: #c5a059;
         --nh-gold-light: #ebd4a5;
         --nh-white: #ffffff;
         position: relative;
         isolation: isolate;
         color: var(--nh-white);
-        background: #302824;
-        font-family: Arial, Helvetica, sans-serif;
+        background: #191412;
+        font-family: "Plus Jakarta Sans", Inter, sans-serif;
       }
       .nh-home,
       .nh-home * {
@@ -169,33 +169,39 @@
         font: inherit;
         cursor: pointer;
       }
-      .nh-home :is(a, button):focus-visible {
-        outline: 3px solid var(--nh-gold-light);
-        outline-offset: 5px;
+
+      /* DYNAMIC STICKY GLASS NAVBAR */
+      .nh-home .nh-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 40;
+        transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(to bottom, rgba(20, 16, 13, 0.8), transparent);
+      }
+      .nh-home .nh-header.is-scrolled {
+        background: rgba(25, 20, 18, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.35);
       }
       .nh-home .nh-container {
-        width: min(1180px, calc(100% - 60px));
+        width: min(1240px, calc(100% - 48px));
         margin-inline: auto;
       }
-
-      /* NAVBAR */
-      .nh-home .nh-header {
-        position: absolute;
-        inset: 0 0 auto;
-        z-index: 20;
-        border-bottom: 1px solid rgb(255 255 255 / 15%);
-        background: linear-gradient(
-          to bottom,
-          rgb(20 16 13 / 65%),
-          transparent
-        );
-      }
       .nh-home .nh-navbar {
-        min-height: 94px;
+        min-height: 88px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 24px;
+        transition: min-height 0.35s ease;
+      }
+      .nh-home .nh-header.is-scrolled .nh-navbar {
+        min-height: 70px;
       }
       .nh-home .nh-brand {
         display: inline-flex;
@@ -205,11 +211,10 @@
       }
       .nh-home .nh-monogram {
         color: var(--nh-gold);
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 38px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 36px;
         line-height: 1;
-        letter-spacing: -3px;
-        padding-right: 3px;
+        letter-spacing: -2px;
         font-weight: 700;
       }
       .nh-home .nh-brand-copy {
@@ -217,87 +222,133 @@
         gap: 2px;
       }
       .nh-home .nh-brand-name {
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 26px;
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 24px;
         font-style: italic;
         line-height: 1;
         color: #ffffff;
       }
       .nh-home .nh-brand-tagline {
-        font-size: 10px;
-        letter-spacing: 2px;
+        font-size: 9px;
+        letter-spacing: 2.5px;
         text-transform: uppercase;
         color: var(--nh-gold);
-        font-weight: 600;
+        font-weight: 700;
       }
       .nh-home .nh-navigation {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 28px;
       }
       .nh-home .nh-nav-link {
         position: relative;
-        padding-block: 10px;
-        font-size: 14px;
-        color: rgb(255 255 255 / 92%);
-        transition: color 180ms ease;
+        padding-block: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        color: rgba(255, 255, 255, 0.85);
+        transition: color 200ms ease;
       }
-      .nh-home .nh-nav-link:hover,
-      .nh-home .nh-nav-link[aria-current="page"] {
-        color: var(--nh-gold-light);
-      }
-      .nh-home .nh-nav-link[aria-current="page"]::after {
+      .nh-home .nh-nav-link::after {
         content: "";
         position: absolute;
-        bottom: 4px;
+        bottom: 2px;
         left: 0;
-        width: 18px;
+        width: 0%;
         height: 2px;
         background: var(--nh-gold);
+        transition: width 250ms cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .nh-home .nh-signup {
+      .nh-home .nh-nav-link:hover {
+        color: #ffffff;
+      }
+      .nh-home .nh-nav-link:hover::after,
+      .nh-home .nh-nav-link[aria-current="page"]::after {
+        width: 100%;
+      }
+
+      /* SHIMMER CTA BUTTON */
+      .nh-home .nh-signup,
+      .nh-home .nh-book {
+        position: relative;
+        overflow: hidden;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 42px;
-        padding: 10px 24px;
-        border: 1px solid var(--nh-gold);
-        border-radius: 30px;
-        background: var(--nh-gold);
-        color: #30251c;
-        font-size: 13px;
+        gap: 12px;
+        border: 1px solid rgba(235, 212, 165, 0.5);
+        background: linear-gradient(135deg, #d9b977 0%, #b38b46 100%);
+        color: #191412;
         font-weight: 700;
-        transition:
-          background 180ms ease,
-          transform 180ms ease;
+        box-shadow: 0 8px 24px -4px rgba(197, 160, 89, 0.45);
+        transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1), filter 250ms ease;
       }
-      .nh-home .nh-signup:hover {
-        background: var(--nh-gold-light);
-        transform: translateY(-1px);
+      .nh-home .nh-signup {
+        min-height: 40px;
+        padding: 8px 22px;
+        border-radius: 9999px;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
       }
+      .nh-home .nh-book {
+        min-height: 52px;
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-size: 13px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+      }
+      .nh-home .nh-signup:hover,
+      .nh-home .nh-book:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 28px -4px rgba(197, 160, 89, 0.6);
+        filter: brightness(1.06);
+      }
+      .nh-home .nh-signup::before,
+      .nh-home .nh-book::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transform: skewX(-20deg) translateX(-150%);
+        transition: none;
+      }
+      .nh-home .nh-signup:hover::before,
+      .nh-home .nh-book:hover::before {
+        animation: shimmerSweep 1s ease-in-out;
+      }
+      @keyframes shimmerSweep {
+        0% { transform: skewX(-20deg) translateX(-150%); }
+        100% { transform: skewX(-20deg) translateX(250%); }
+      }
+
+      /* MOBILE MENU TOGGLE */
       .nh-home .nh-menu-toggle {
         display: none;
         width: 44px;
         height: 44px;
         align-items: center;
         justify-content: center;
-        border: 1px solid rgb(255 255 255 / 40%);
-        border-radius: 6px;
-        background: rgb(0 0 0 / 25%);
-        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.3);
+        color: #ffffff;
       }
       .nh-home .nh-menu-toggle svg {
-        width: 23px;
-        height: 23px;
+        width: 22px;
+        height: 22px;
       }
 
-      /* HERO */
+      /* HERO WITH KEN BURNS CINEMATIC MOTION */
       .nh-home .nh-hero {
         position: relative;
         display: flex;
         align-items: center;
-        min-height: 620px;
-        min-height: clamp(540px, 78svh, 800px);
+        min-height: clamp(640px, 88svh, 860px);
         overflow: hidden;
       }
       .nh-home .nh-slides,
@@ -314,135 +365,100 @@
         object-fit: cover;
         object-position: center;
         opacity: 0;
-        transition: opacity 650ms ease;
+        transform: scale(1.08);
+        transition: opacity 1000ms ease, transform 6000ms cubic-bezier(0.25, 1, 0.5, 1);
       }
       .nh-home .nh-slide.is-active {
         opacity: 1;
+        transform: scale(1);
       }
       .nh-home .nh-shade {
         background:
-          linear-gradient(
-            90deg,
-            rgb(19 15 13 / 82%) 0%,
-            rgb(19 15 13 / 50%) 42%,
-            rgb(19 15 13 / 15%) 100%
-          ),
-          linear-gradient(0deg, rgb(19 15 13 / 35%), transparent 40%);
+          linear-gradient(90deg, rgba(16, 12, 10, 0.92) 0%, rgba(16, 12, 10, 0.68) 48%, rgba(16, 12, 10, 0.25) 100%),
+          linear-gradient(0deg, rgba(16, 12, 10, 0.8) 0%, transparent 45%);
       }
       .nh-home .nh-hero-content {
         position: relative;
-        z-index: 1;
-        padding-top: 130px;
-        padding-bottom: 110px;
+        z-index: 2;
+        padding-top: 150px;
+        padding-bottom: 120px;
       }
       .nh-home .nh-eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin: 0 0 20px;
-        color: var(--nh-gold-light);
+        margin: 0 0 14px;
         font-size: 11px;
-        line-height: 1.6;
         letter-spacing: 3px;
         text-transform: uppercase;
+        color: var(--nh-gold-light);
         font-weight: 600;
       }
-      .nh-home .nh-eyebrow::before {
-        content: "";
-        width: 34px;
-        height: 1px;
-        flex-shrink: 0;
-        background: var(--nh-gold);
-      }
       .nh-home .nh-title {
-        max-width: 680px;
+        max-width: 720px;
         margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(36px, 4.5vw, 64px);
-        line-height: 1.14;
-        letter-spacing: -1.5px;
-        font-weight: 400;
-        text-wrap: balance;
-        text-shadow: 0 2px 20px rgb(0 0 0 / 30%);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(38px, 4.8vw, 66px);
+        line-height: 1.1;
+        letter-spacing: -1px;
+        font-weight: 600;
+        text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
       }
       .nh-home .nh-title span {
         display: block;
         margin-bottom: 6px;
         font-style: italic;
-        color: #ffffff;
+        font-weight: 400;
+        color: var(--nh-gold-light);
       }
       .nh-home .nh-description {
-        max-width: 440px;
-        margin: 20px 0 28px;
-        color: rgb(255 255 255 / 88%);
-        font-size: 14.5px;
-        line-height: 1.8;
-      }
-      .nh-home .nh-book {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        min-height: 48px;
-        padding: 13px 28px;
-        border: 1px solid var(--nh-gold);
-        border-radius: 4px;
-        background: var(--nh-gold);
-        color: #30251c;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        transition:
-          background 180ms ease,
-          transform 180ms ease;
-      }
-      .nh-home .nh-book:hover {
-        background: var(--nh-gold-light);
-        transform: translateY(-2px);
+        max-width: 520px;
+        margin: 22px 0 32px;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 15px;
+        line-height: 1.75;
       }
 
-      /* SLIDER CONTROLS */
+      /* MODERN PROGRESS BAR SLIDER INDICATORS */
       .nh-home .nh-slider-controls {
         position: absolute;
-        z-index: 2;
-        bottom: 28px;
+        z-index: 3;
+        bottom: 84px;
         left: 50%;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 10px;
         transform: translateX(-50%);
       }
       .nh-home .nh-dot {
-        display: grid;
-        place-items: center;
-        width: 30px;
-        height: 34px;
-        padding: 0;
+        width: 48px;
+        height: 4px;
+        border-radius: 999px;
         border: 0;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.25);
+        overflow: hidden;
+        position: relative;
+        padding: 0;
         cursor: pointer;
+        transition: width 0.3s ease;
       }
-      .nh-home .nh-dot::before {
+      .nh-home .nh-dot[aria-pressed="true"] {
+        width: 72px;
+        background: rgba(255, 255, 255, 0.35);
+      }
+      .nh-home .nh-dot[aria-pressed="true"]::after {
         content: "";
-        width: 8px;
-        height: 8px;
-        border: 1px solid rgb(255 255 255 / 75%);
-        border-radius: 50%;
-        background: rgb(255 255 255 / 55%);
-        transition:
-          background 180ms ease,
-          box-shadow 180ms ease;
-      }
-      .nh-home .nh-dot[aria-pressed="true"]::before {
-        border-color: var(--nh-gold);
+        position: absolute;
+        inset: 0;
         background: var(--nh-gold);
-        box-shadow: 0 0 0 4px rgb(217 185 119 / 25%);
+        animation: slideProgress 5s linear forwards;
+      }
+      @keyframes slideProgress {
+        from { width: 0%; }
+        to { width: 100%; }
       }
 
       /* 250 METRES SECTION */
       .nh-temple-section {
         background: #faf8f5;
-        padding: 56px 20px 48px;
+        padding: 64px 20px 56px;
         text-align: center;
         border-bottom: 1px solid #ebe5de;
       }
@@ -456,88 +472,77 @@
         margin-bottom: 10px;
       }
       .nh-temple-title {
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(26px, 3.2vw, 40px);
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(26px, 3.2vw, 42px);
         color: #181412;
         font-weight: 700;
         margin: 0 0 14px;
         letter-spacing: -0.5px;
       }
       .nh-temple-desc {
-        max-width: 640px;
-        margin: 0 auto 30px;
+        max-width: 660px;
+        margin: 0 auto 32px;
         color: #5c544e;
-        font-size: 13.5px;
-        line-height: 1.7;
+        font-size: 14px;
+        line-height: 1.75;
       }
 
-      @media (max-width: 800px) {
-        .nh-home .nh-container {
-          width: calc(100% - 32px);
-        }
-        .nh-home .nh-navbar {
-          min-height: 80px;
-        }
-        .nh-home .nh-brand-name {
-          font-size: 24px;
-        }
-        .nh-home .nh-monogram {
-          font-size: 34px;
-        }
+      /* RESPONSIVE & MOBILE OVERLAYS */
+      @media (max-width: 900px) {
         .nh-home .nh-menu-toggle {
           display: inline-flex;
         }
         .nh-home .nh-navigation {
           display: none;
           position: absolute;
-          top: 80px;
-          left: 0;
-          right: 0;
-          padding: 20px;
+          inset: 100% 0 auto;
           flex-direction: column;
           align-items: stretch;
-          gap: 6px;
-          border-top: 1px solid rgb(255 255 255 / 12%);
-          background: #241d1a;
-          box-shadow: 0 15px 25px rgb(0 0 0 / 30%);
+          padding: 20px;
+          background: #1f1917;
+          border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+          gap: 12px;
         }
         .nh-home .nh-navigation.is-open {
           display: flex;
         }
         .nh-home .nh-nav-link {
-          padding: 12px 8px;
+          padding: 10px 0;
         }
-        .nh-home .nh-nav-link[aria-current="page"]::after {
-          left: 8px;
+        .nh-home .nh-nav-link::after {
+          display: none;
         }
         .nh-home .nh-signup {
           align-self: flex-start;
-          margin-top: 10px;
+          margin-top: 6px;
         }
         .nh-home .nh-hero {
-          min-height: 560px;
-        }
-        .nh-home .nh-slide {
-          object-position: 60% center;
-        }
-        .nh-home .nh-shade {
-          background: linear-gradient(
-            90deg,
-            rgb(19 15 13 / 85%),
-            rgb(19 15 13 / 45%)
-          );
+          min-height: 580px;
         }
         .nh-home .nh-hero-content {
-          padding-top: 120px;
-          padding-bottom: 90px;
+          padding-top: 130px;
+          padding-bottom: 80px;
         }
-        .nh-home .nh-title {
-          max-width: 520px;
-          letter-spacing: -1px;
+        .nh-home .nh-slider-controls {
+          bottom: 30px;
         }
-        .nh-home .nh-description {
-          max-width: 350px;
-          font-size: 13.5px;
+      }
+
+      /* REDUCED MOTION SUPPORT */
+      @media (prefers-reduced-motion: reduce) {
+        .nh-home .nh-slide,
+        .nh-home .nh-slide.is-active {
+          transition: none !important;
+          transform: none !important;
+        }
+        .nh-home .nh-dot[aria-pressed="true"]::after {
+          animation: none !important;
+          width: 100% !important;
+        }
+        .nh-home .nh-signup::before,
+        .nh-home .nh-book::before {
+          display: none !important;
         }
       }
     </style>
@@ -986,6 +991,31 @@
         const [heroSlide, setHeroSlide] = useState(0);
         const [toastMessage, setToastMessage] = useState(null);
 
+        // Product State: Dynamic Sticky Navbar & Photo Switchers
+        const [isScrolled, setIsScrolled] = useState(false);
+        const [isHeroPaused, setIsHeroPaused] = useState(false);
+        const [activeRoomImg, setActiveRoomImg] = useState({
+          deluxe: "main",
+          executive: "main",
+        });
+
+        // 1. Track window scroll for dynamic glass navbar (including restored scroll positions)
+        useEffect(() => {
+          const onScroll = () => setIsScrolled(window.scrollY > 40);
+          onScroll();
+          window.addEventListener("scroll", onScroll, { passive: true });
+          return () => window.removeEventListener("scroll", onScroll);
+        }, []);
+
+        // 2. Auto-advance Hero Carousel every 5 seconds (pauses on hover)
+        useEffect(() => {
+          if (isHeroPaused) return;
+          const timer = setInterval(() => {
+            setHeroSlide((prev) => (prev + 1) % 3);
+          }, 5000);
+          return () => clearInterval(timer);
+        }, [isHeroPaused]);
+
         // Interactive Landmark Modal & N-AI State
         const [selectedLandmark, setSelectedLandmark] = useState(null);
         const [aiActiveQuestion, setAiActiveQuestion] = useState(null);
@@ -1188,7 +1218,7 @@
                 <!-- START: UPDATED NAVBAR AND HERO COMPONENT               -->
                 <!-- ==================================================== -->
                 <div class="nh-home" id="nh-home">
-                  <header class="nh-header">
+                  <header class=${`nh-header ${isScrolled ? "is-scrolled" : ""}`}>
                     <div class="nh-container nh-navbar">
                       <!-- Brand Lockup -->
                       <a
@@ -1301,7 +1331,12 @@
                   </header>
 
                   <!-- Hero Section -->
-                  <section class="nh-hero" aria-labelledby="nh-hero-title">
+                  <section
+                    class="nh-hero"
+                    aria-labelledby="nh-hero-title"
+                    onMouseEnter=${() => setIsHeroPaused(true)}
+                    onMouseLeave=${() => setIsHeroPaused(false)}
+                  >
                     <div class="nh-slides" aria-hidden="true">
                       ${heroSlides.map(
                         (slideImg, idx) => html`
@@ -1326,17 +1361,40 @@
                       </h1>
 
                       <p class="nh-description">
-                        Enjoy a restful stay with elegant rooms, thoughtful
-                        comforts, and a warm welcome in Pithapuram.
+                        Elevated peacefully on the 3rd floor above Park Centre. Spotless luxury rooms, 24/7 hot water, dedicated elevator, and flexible 24-hour stay cycles.
                       </p>
 
-                      <a class="nh-book" href="#enquire">
-                        <span>Book Now</span>
-                        <span aria-hidden="true">↗</span>
-                      </a>
+                      <div class="flex flex-wrap items-center gap-4">
+                        <a class="nh-book" href="#enquire">
+                          <span>Reserve Direct Stay</span>
+                          <span aria-hidden="true">↗</span>
+                        </a>
+                        <a
+                          href="#rooms"
+                          class="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider transition-all"
+                        >
+                          Explore Suites
+                        </a>
+                      </div>
+
+                      <!-- Live Product Trust Strip (Ground Truth Verified Facts) -->
+                      <div class="mt-10 pt-6 border-t border-white/15 grid grid-cols-3 gap-6 max-w-lg">
+                        <div>
+                          <p class="font-serif text-2xl font-bold text-[#ebd4a5]">250m</p>
+                          <p class="text-[11px] text-white/70">To Sri Pada Temple</p>
+                        </div>
+                        <div>
+                          <p class="font-serif text-2xl font-bold text-[#ebd4a5]">07:00 AM</p>
+                          <p class="text-[11px] text-white/70">24-Hr Check-In Cycle</p>
+                        </div>
+                        <div>
+                          <p class="font-serif text-2xl font-bold text-[#ebd4a5]">4.5 ★</p>
+                          <p class="text-[11px] text-white/70">Verified Guest Rating</p>
+                        </div>
+                      </div>
                     </div>
 
-                    <!-- Slider Controls -->
+                    <!-- Modern Progress Bar Slider Controls -->
                     <div
                       class="nh-slider-controls"
                       role="group"
@@ -1350,7 +1408,9 @@
                             type="button"
                             aria-label=${`Show photograph ${idx + 1}`}
                             aria-pressed=${heroSlide === idx ? "true" : "false"}
-                            onClick=${() => setHeroSlide(idx)}
+                            onClick=${() => {
+                              setHeroSlide(idx);
+                            }}
                           ></button>
                         `,
                       )}
@@ -1358,6 +1418,77 @@
                   </section>
                 </div>
                 <!-- END: Updated navbar and hero -->
+
+                <!-- OVERLAPPING FLOATING BOOKING BAR (BRIDGING HERO & TEMPLE SECTION) -->
+                <div id="overview" class="-mt-10 sm:-mt-14 relative z-30 max-w-6xl mx-auto px-4">
+                  <div class="luxury-glass rounded-2xl p-4 sm:p-5 shadow-2xl border border-brand-gold/35">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 items-end">
+                      <div class="bg-white/95 p-3 rounded-xl border border-stone-200/80 shadow-2xs">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                          Check-In Date
+                        </label>
+                        <input
+                          type="date"
+                          value=${formData.checkInDate}
+                          onChange=${(e) => setFormData({ ...formData, checkInDate: e.target.value })}
+                          class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
+                        />
+                      </div>
+
+                      <div class="bg-white/95 p-3 rounded-xl border border-stone-200/80 shadow-2xs">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                          Check-Out Date
+                        </label>
+                        <input
+                          type="date"
+                          value=${formData.checkOutDate}
+                          onChange=${(e) => setFormData({ ...formData, checkOutDate: e.target.value })}
+                          class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
+                        />
+                      </div>
+
+                      <div class="bg-white/95 p-3 rounded-xl border border-stone-200/80 shadow-2xs">
+                        <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1">
+                          Stay Cycle (24h)
+                        </label>
+                        <select
+                          value=${formData.checkInSlot}
+                          onChange=${(e) => setFormData({ ...formData, checkInSlot: e.target.value })}
+                          class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
+                        >
+                          <option value="07:00 AM (24-Hour Cycle)">07:00 AM (24h Stay Cycle)</option>
+                          <option value="11:00 AM (Standard Cycle)">11:00 AM (Standard Cycle)</option>
+                        </select>
+                      </div>
+
+                      <div class="bg-white/95 p-3 rounded-xl border border-stone-200/80 shadow-2xs">
+                        <div class="flex items-center justify-between mb-1">
+                          <label class="block text-[10px] font-bold uppercase tracking-wider text-stone-500">
+                            Suite Category
+                          </label>
+                          <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Flat Net Rate</span>
+                        </div>
+                        <select
+                          value=${formData.roomType}
+                          onChange=${(e) => setFormData({ ...formData, roomType: e.target.value })}
+                          class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
+                        >
+                          <option value="Deluxe AC Room (₹1,800/24h)">Deluxe AC (₹1,800 / 24h)</option>
+                          <option value="Executive Family Suite (₹2,500/24h)">Executive Suite (₹2,500 / 24h)</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <a
+                          href="#enquire"
+                          class="luxury-btn-gold block w-full py-3.5 px-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-surface-dark shadow-md"
+                        >
+                          Reserve Room ↗
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <!-- 250 METRES TEMPLE SECTION -->
                 <section class="nh-temple-section">
@@ -1544,125 +1675,7 @@
                   </div>
                 </section>
 
-                <section id="overview" class="pt-10 pb-8">
-                  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- SLEEK HORIZONTAL PRODUCT-GRADE BOOKING BAR -->
-                    <div
-                      class="luxury-glass rounded-2xl p-4 sm:p-5 mb-14 shadow-xl border border-brand-gold/30"
-                    >
-                      <div
-                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 items-end"
-                      >
-                        <div
-                          class="bg-white/90 p-3 rounded-xl border border-stone-200/80"
-                        >
-                          <label
-                            class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1"
-                          >
-                            Check-In Date
-                          </label>
-                          <input
-                            type="date"
-                            value=${formData.checkInDate}
-                            onChange=${(e) =>
-                              setFormData({
-                                ...formData,
-                                checkInDate: e.target.value,
-                              })}
-                            class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
-                          />
-                        </div>
-
-                        <div
-                          class="bg-white/90 p-3 rounded-xl border border-stone-200/80"
-                        >
-                          <label
-                            class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1"
-                          >
-                            Check-Out Date
-                          </label>
-                          <input
-                            type="date"
-                            value=${formData.checkOutDate}
-                            onChange=${(e) =>
-                              setFormData({
-                                ...formData,
-                                checkOutDate: e.target.value,
-                              })}
-                            class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
-                          />
-                        </div>
-
-                        <div
-                          class="bg-white/90 p-3 rounded-xl border border-stone-200/80"
-                        >
-                          <label
-                            class="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-1"
-                          >
-                            Check-In Cycle
-                          </label>
-                          <select
-                            value=${formData.checkInSlot}
-                            onChange=${(e) =>
-                              setFormData({
-                                ...formData,
-                                checkInSlot: e.target.value,
-                              })}
-                            class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
-                          >
-                            <option value="07:00 AM (24-Hour Cycle)">
-                              07:00 AM (24h Stay Cycle)
-                            </option>
-                            <option value="11:00 AM (Standard Cycle)">
-                              11:00 AM (Standard Cycle)
-                            </option>
-                          </select>
-                        </div>
-
-                        <div
-                          class="bg-white/90 p-3 rounded-xl border border-stone-200/80"
-                        >
-                          <div class="flex items-center justify-between mb-1">
-                            <label
-                              class="block text-[10px] font-bold uppercase tracking-wider text-stone-500"
-                            >
-                              Suite Category
-                            </label>
-                            <span
-                              class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200"
-                              >Flat Net Rate</span
-                            >
-                          </div>
-                          <select
-                            value=${formData.roomType}
-                            onChange=${(e) =>
-                              setFormData({
-                                ...formData,
-                                roomType: e.target.value,
-                              })}
-                            class="w-full text-xs font-semibold text-surface-dark bg-transparent focus:outline-none cursor-pointer"
-                          >
-                            <option value="Deluxe AC Room (₹1,800/24h)">
-                              Deluxe AC (₹1,800 / 24h)
-                            </option>
-                            <option value="Executive Family Suite (₹2,500/24h)">
-                              Executive Suite (₹2,500 / 24h)
-                            </option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <a
-                            href="#enquire"
-                            class="luxury-btn-gold block w-full py-3 px-4 rounded-xl text-center text-xs font-bold uppercase tracking-wider text-surface-dark shadow-md"
-                          >
-                            Check Availability ↗
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- ROOMS & TARIFFS (FLAGSHIP PRODUCT SHOWCASE) -->
+                <!-- ROOMS & TARIFFS (FLAGSHIP PRODUCT SHOWCASE) -->
                     <div id="rooms" class="scroll-mt-24 mb-16">
                       <div
                         class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8"
