@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Interaction QA</title>
+    <style>
+      body { font: 12px/1.45 monospace; margin: 0; padding: 12px; }
+      #out { white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <div id="out">running…</div>
+    <div id="stage"></div>
+    <script>
+      const R = [];
+      const ok = (n, c, d) => R.push(`${c ? "PASS" : "FAIL"}  ${n}${d ? "  — " + d : ""}`);
+
+      function load(page, w, h) {
+        return new Promise((res) => {
+          const f = document.createElement("iframe");
+          f.style.cssText = `width:${w}px;height:${h || 900}px;border:0;position:absolute;left:-99999px;top:0`;
+          f.src = page;
+          f.onload = () => setTimeout(() => res(f), 500);
+          document.getElementById("stage").appendChild(f);
+        });
+      }
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      async function run() {
+        localStorage.removeItem("nh-enquiries-v1");
+
+        /* ================= DESK: empty state ================= */
+        let dz = await load("desk.html", 1280, 900);
+        ok("desk starts with empty state", !dz.contentDocument.getElementById("queueEmpty").hidden);
+        dz.remove();
+
+        /* ================= GUEST @1280 ================= */
+        const f = await load("index.html", 1280, 1000);
+        const d = f.contentDocument, win = f.contentWindow;
+        const rect = (s) => d.querySelector(s).getBoundingClientRect();
+        const click = (el) => el.dispatchEvent(new win.MouseEvent("click", { bubbles: true }));
+        const setv = (id, v) => {
+          const el = d.getElementById(id);
+          el.value = v;
+          el.dispatchEvent(new win.Event("input", { bubbles: true }));
+          el.dispatchEvent(new win.Event("change", { bubbles: true }));
+        };
+
+        // 1. booking / hero seam
+        const shell = rect(".booking__shell"), tools = rect(".hero__tools");
+        ok("hero controls clear of booking panel", shell.top - tools.bottom >= 8,
+           `clearance ${Math.round(shell.top - tools.bottom)}px`);
+        ok("facts clear of booking panel",
+           shell.top - rect(".hero__facts").bottom >= 8,
+           `clearance ${Math.round(shell.top - rect(".hero__facts").bottom)}px`);
+        ok("booking panel overlaps hero seam", shell.top < rect(".hero").bottom,
+           `overlap ${Math.round(rect(".hero").bottom - shell.top)}px`);
+        ok("no overflow at 1280", d.documentElement.scrollWidth <= d.documentElement.clientWidth + 1);
+
+        // 2. room photo switcher
+        const tg = d.querySelectorAll(".shot__toggle button");
+        const card = tg[0].closest("article[data-room]");
+        const before = card.querySelector(".shot__img.is-active");
+        click(tg[1]);
+        await wait(80);
+        const after = card.querySelector(".shot__img.is-active");
+        ok("photo toggle swaps image", !!after && before !== after,
+           `${before && before.dataset.shot} -> ${after && after.dataset.shot}`);
+        ok("photo toggle sets aria-pressed", tg[1].getAttribute("aria-pressed") === "true");
+        ok("inactive image hidden", [...card.querySelectorAll(".shot__img")]
+           .filter((i) => !i.classList.contains("is-active")).every((i) => getComputedStyle(i).opacity === "0"));
+
+        // 3. select-room CTA jumps to enquiry
+        const pick = d.querySelector("[data-select-room]");
+        click(pick);
+        await wait(80);
+        ok("select-room sets enquiry room", d.getElementById("gRoom").value === pick.dataset.selectRoom,
+           d.getElementById("gRoom").value);
+
+        // 4. landmark sheet — temple then transit
+        const lmBtn = d.querySelector("[data-landmark]");
+        click(lmBtn);
+        await wait(140);
+        const sheet = d.getElementById("sheet"), panel = d.getElementById("sheetPanel");
+        ok("sheet opens", !sheet.hidden, d.getElementById("sheet-title").textContent.trim());
+        ok("sheet lockscroll", d.body.classList.contains("no-scroll"));
+        ok("sheet focusable", d.activeElement === panel || panel.contains(d.activeElement), d.activeElement.id || d.activeElement.className);
+        const templeTxt = panel.textContent;
+        ok("temple sheet uses temple vocabulary", /Darshan|Aarti/i.test(templeTxt),
+           (templeTxt.match(/Darshan|Aarti/i) || [])[0]);
+
+        const transit = [...d.querySelectorAll("[data-landmark]")]
+          .find((b) => /Railway|Airport|Junction/.test(b.textContent));
+        click(transit);
+        await wait(140);
+        const tTxt = panel.textContent;
+        ok("transit sheet avoids temple words", !/Darshan|Aarti/i.test(tTxt),
+           tTxt.replace(/\s+/g, " ").slice(0, 70));
+        ok("transit sheet has own label", /Hours|Timings/i.test(tTxt));
+
+        // qa accordion inside sheet
+        const qa = panel.querySelector("[data-qa]");
+        const qaWasOpen = qa.closest(".qa__item").dataset.open === "true";
+        click(qa);
+        await wait(80);
+        ok("sheet FAQ toggles", qa.closest(".qa__item").dataset.open !== String(qaWasOpen),
+           `aria-expanded=${qa.getAttribute("aria-expanded")}`);
+
+        d.dispatchEvent(new win.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+        await wait(160);
+        ok("Escape closes sheet", sheet.hidden === true);
+        ok("scroll lock released", !d.body.classList.contains("no-scroll"));
+        ok("focus returned to trigger", d.activeElement === transit, d.activeElement.tagName);
+        ok("sheet content cleared", panel.innerHTML.trim() === "");
+
+        // 5. booking <-> enquiry mirror + live estimate
+        setv("bkIn", "2026-11-10");
+        setv("bkOut", "2026-11-13");
+        setv("bkRoom", "Executive Family Suite");
+        await wait(80);
+        ok("dates mirror to enquiry", d.getElementById("gIn").value === "2026-11-10", d.getElementById("gIn").value);
+        ok("nights computed", d.getElementById("sumNights").textContent === "3", d.getElementById("sumNights").textContent);
+        ok("total = nights x rate", d.getElementById("sumTotal").textContent === "₹7,500", d.getElementById("sumTotal").textContent);
+        setv("gOut", "2026-11-05");
+        await wait(80);
+        ok("checkout auto-repaired after checkin", d.getElementById("gOut").value > d.getElementById("gIn").value,
+           d.getElementById("gIn").value + " / " + d.getElementById("gOut").value);
+
+        // 6. validation
+        setv("gIn", "2026-11-10"); setv("gOut", "2026-11-13");
+        d.getElementById("gName").value = "";
+        d.getElementById("gPhone").value = "";
+        d.getElementById("enquiryForm").dispatchEvent(new win.Event("submit", { bubbles: true, cancelable: true }));
+        await wait(80);
+        ok("empty submit blocked", win.EnquiryStore.all().length === 3, `${win.EnquiryStore.all().length} records`);
+        ok("form error shown", !d.getElementById("formError").hidden, d.getElementById("formError").textContent.trim());
+        d.getElementById("gPhone").value = "12345";
+        d.getElementById("gName").value = "Test Guest";
+        d.getElementById("enquiryForm").dispatchEvent(new win.Event("submit", { bubbles: true, cancelable: true }));
+        await wait(80);
+        ok("short phone blocked", win.EnquiryStore.all().length === 3 && /10-digit/.test(d.getElementById("formError").textContent),
+           d.getElementById("formError").textContent.trim());
+
+        // 7. valid submit
+        d.getElementById("gPhone").value = "+91 98765 43210";
+        d.getElementById("gNote").value = "Quiet 3rd-floor room, please.";
+        d.getElementById("enquiryForm").dispatchEvent(new win.Event("submit", { bubbles: true, cancelable: true }));
+        await wait(150);
+        const recs = win.EnquiryStore.all();
+        ok("record stored", recs.length === 4, `${recs.length} records, id=${recs[0].id}`);
+        ok("confirm panel shown", !d.getElementById("confirmPanel").hidden && d.getElementById("enquiryForm").hidden);
+        ok("reference echoed", d.getElementById("confirmRef").textContent === recs[0].id, d.getElementById("confirmRef").textContent);
+        ok("whatsapp handoff built", /wa\.me/.test(d.getElementById("whatsappLink").href),
+           decodeURIComponent(d.getElementById("whatsappLink").href).slice(0, 90));
+        const waText = decodeURIComponent(d.getElementById("whatsappLink").href);
+        ok("estimate in whatsapp msg", /₹7,500/.test(waText), (waText.match(/Estimate: .*/) || ["none"])[0]);
+        ok("toast shown", !d.getElementById("toast").hidden, d.getElementById("toastText").textContent.trim());
+        click(d.getElementById("clearConfirm"));
+        await wait(80);
+        ok("new-enquiry resets form", !d.getElementById("enquiryForm").hidden && d.getElementById("gName").value === "");
+
+        // XSS: raw markup must never reach the DOM
+        const bodyHtml = d.body.innerHTML;
+        ok("no injected script markup", bodyHtml.indexOf("<script>x</script>") === -1);
+
+        /* ================= DESK: handoff + actions ================= */
+        const dz2 = await load("desk.html", 1280, 900);
+        const dd = dz2.contentDocument, dw = dz2.contentWindow;
+        await wait(200);
+        const rows = () => dd.querySelectorAll(".queue__table tbody tr").length;
+        ok("desk reads guest enquiry", rows() === 4, `${rows()} rows`);
+        const kpis = [...dd.querySelectorAll(".kpi__value")].map((e) => e.textContent.trim());
+        ok("KPIs populated", kpis.length >= 3 && kpis[0] === "4", kpis.join(" | "));
+
+        const dcard = dz2.contentDocument.querySelector(".desk-filter");
+        if (dcard) { dcard.value = "New"; dcard.dispatchEvent(new dw.Event("change", { bubbles: true })); await wait(80);
+          ok("filter narrows queue", rows() === 1, `${rows()} New rows`);
+          dcard.value = "All"; dcard.dispatchEvent(new dw.Event("change", { bubbles: true })); await wait(80); }
+
+        const confirmBtn = [...dd.querySelectorAll("[data-confirm]")][0];
+        const rid = confirmBtn.dataset.confirm;
+        confirmBtn.dispatchEvent(new dw.MouseEvent("click", { bubbles: true }));
+        await wait(150);
+        ok("confirm updates store", (dw.EnquiryStore.all().find((x) => x.id === rid) || {}).status === "Confirmed",
+           (dw.EnquiryStore.all().find((x) => x.id === rid) || {}).status);
+        ok("confirm removes button", !dd.querySelector(`[data-confirm="${rid}"]`));
+
+        const demo = [...dd.querySelectorAll("button")].find((b) => /test record|demo/i.test(b.textContent));
+        if (demo) { demo.dispatchEvent(new dw.MouseEvent("click", { bubbles: true })); await wait(150);
+          ok("add test record", rows() === 5, `${rows()} rows`); }
+        const reset = [...dd.querySelectorAll("button")].find((b) => /reset|seed/i.test(b.textContent));
+        if (reset) { reset.dispatchEvent(new dw.MouseEvent("click", { bubbles: true })); await wait(200);
+          ok("reset restores seed", rows() === 3, `${rows()} rows`); }
+        dz2.remove();
+
+        // empty state
+        localStorage.removeItem("nh-enquiries-v1");
+        const dz3 = await load("desk.html", 1280, 900);
+        ok("desk empty state", !dz3.contentDocument.getElementById("queueEmpty").hidden &&
+           dz3.contentDocument.querySelectorAll(".queue__table tbody tr").length === 0);
+        dz3.remove();
+
+        /* ================= MOBILE @375 + @320 ================= */
+        for (const w of [375, 320]) {
+          const m = await load("index.html", w, 740);
+          const md = m.contentDocument, mw = m.contentWindow;
+          const mc = (el) => el.dispatchEvent(new mw.MouseEvent("click", { bubbles: true }));
+          const cw = md.documentElement.clientWidth;
+          ok(`[${w}] no page overflow`, md.documentElement.scrollWidth <= cw + 1,
+             `${md.documentElement.scrollWidth}/${cw}`);
+          const tools = md.querySelector(".hero__tools").getBoundingClientRect();
+          ok(`[${w}] hero controls inside viewport`, tools.right <= cw + 1 && tools.left >= -1,
+             `[${Math.round(tools.left)}..${Math.round(tools.right)}] vs ${cw}`);
+          const pause = md.querySelector(".hero__pause").getBoundingClientRect();
+          ok(`[${w}] pause tappable`, pause.height >= 26 && pause.right <= cw + 1,
+             `${Math.round(pause.width)}x${Math.round(pause.height)}`);
+          const dots = [...md.querySelectorAll(".dot")];
+          ok(`[${w}] dots >= 24px wide`, dots.every((x) => x.getBoundingClientRect().width >= 24),
+             dots.map((x) => Math.round(x.getBoundingClientRect().width)).join(","));
+          mc(dots[2]); await wait(100);
+          ok(`[${w}] dot selects slide`, dots[2].getAttribute("aria-pressed") === "true" &&
+             md.querySelectorAll(".hero__slide.is-active").length === 1);
+          mc(md.getElementById("heroPause")); await wait(100);
+          ok(`[${w}] pause toggles`, md.querySelector(".hero").dataset.paused === "true" &&
+             /Play|Resume/.test(md.getElementById("heroPauseLabel").textContent),
+             md.getElementById("heroPauseLabel").textContent);
+          mc(md.getElementById("heroPause")); await wait(100);
+
+          const nav = md.getElementById("nav"), navToggle = md.getElementById("navToggle");
+          ok(`[${w}] drawer starts closed`, nav.getAttribute("data-open") === "false");
+          mc(navToggle); await wait(150);
+          ok(`[${w}] drawer opens`, nav.getAttribute("data-open") === "true");
+          const drawerLinks = [...nav.querySelectorAll("a")].filter((a) => a.getClientRects().length);
+          ok(`[${w}] drawer links laid out`, drawerLinks.length >= 6, `${drawerLinks.length} links`);
+          const tiny = drawerLinks.filter((a) => { const r = a.getBoundingClientRect(); return r.height < 26 || r.width < 24; });
+          ok(`[${w}] drawer taps >= 26px`, tiny.length === 0, tiny.map((a) => Math.round(a.getBoundingClientRect().height) + "px " + a.textContent.trim().slice(0, 12)).join(", "));
+          const navRect = nav.getBoundingClientRect();
+          ok(`[${w}] drawer inside viewport`, navRect.right <= cw + 1 && navRect.left >= -1,
+             `[${Math.round(navRect.left)}..${Math.round(navRect.right)}]`);
+          md.dispatchEvent(new mw.KeyboardEvent("keydown", { key: "Escape", bubbles: true })); await wait(150);
+          ok(`[${w}] Escape closes drawer`, nav.getAttribute("data-open") === "false");
+          ok(`[${w}] Escape returns focus to toggle`, md.activeElement === navToggle, md.activeElement.id);
+
+          mc(navToggle); await wait(150);
+          mc(drawerLinks[0]); await wait(150);
+          ok(`[${w}] link click closes drawer`, nav.getAttribute("data-open") === "false");
+
+          const sheetBtn = md.querySelector("[data-landmark]");
+          mc(sheetBtn); await wait(150);
+          const sp = md.getElementById("sheetPanel").getBoundingClientRect();
+          ok(`[${w}] sheet fits viewport`, sp.width <= cw + 1 && sp.left >= -1, `${Math.round(sp.width)}px wide`);
+          mc(md.querySelector("[data-sheet-close]")); await wait(120);
+          ok(`[${w}] sheet close button works`, md.getElementById("sheet").hidden);
+          m.remove();
+        }
+
+        /* ================= sticky header state ================= */
+        const s = await load("index.html", 1280, 900);
+        const sd = s.contentDocument, sw = s.contentWindow;
+        ok("header unstuck at top", !sd.getElementById("siteHead").classList.contains("is-stuck"));
+        sw.scrollTo(0, 260);
+        await wait(200);
+        ok("header sticks after scroll", sd.getElementById("siteHead").classList.contains("is-stuck"));
+        const current = sd.querySelector('[aria-current="true"]');
+        ok("scroll-spy marks a section", !!current, current ? current.textContent.trim() : "none");
+        ok("mobile CTA hidden on desktop", s.contentDocument.getElementById("mobileCta").dataset.show !== "true");
+        s.remove();
+
+        const mcta = await load("index.html", 375, 740);
+        mcta.contentWindow.scrollTo(0, 900);
+        await wait(250);
+        ok("mobile CTA appears on scroll", mcta.contentDocument.getElementById("mobileCta").dataset.show === "true");
+        mcta.remove();
+
+        document.getElementById("out").textContent = R.join("\n");
+        window.__DONE__ = true;
+      }
+
+      run().catch((e) => {
+        document.getElementById("out").textContent =
+          R.join("\n") + "\n\nERROR: " + (e && e.stack ? e.stack : String(e));
+        window.__DONE__ = true;
+      });
+    </script>
+  </body>
+</html>

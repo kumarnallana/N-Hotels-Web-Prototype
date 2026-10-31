@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[N] Hotel's — Luxury Rooms in Pithapuram | Direct Booking</title>
+    <meta
+      name="description"
+      content="Spotless rooms on the upper floors of VVS Grand at Park Centre, Pithapuram — 24/7 hot water, dedicated lift access and a flexible 24-hour check-in cycle. Book direct with the front desk."
+    />
+    <meta name="theme-color" content="#1a1513" />
+    <link rel="icon" href="assets/img/brand-logo.jpg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/tokens.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- ====================================================================
+         PROMISE BAR — scrolls away; the header below it is sticky, so the two
+         can never overlap at any width.
+         ==================================================================== -->
+    <div class="promo">
+      <div class="wrap promo__inner">
+        <p class="promo__msg">
+          <span class="promo__dot" aria-hidden="true"></span>
+          <span
+            ><strong>Direct booking only.</strong> The rate on this page is the
+            rate at the desk — no channel markup.</span
+          >
+        </p>
+        <div class="promo__side">
+          <span class="promo__tag">Design prototype</span>
+          <a class="promo__phone" id="promoPhone" href="#">
+            <span>Front desk 24/7:</span>
+            <span id="promoPhoneText"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====================================================================
+         STICKY HEADER
+         ==================================================================== -->
+    <header class="site-head" id="siteHead">
+      <div class="wrap head-inner">
+        <a class="brand" href="#top" aria-label="[N] Hotels — back to top">
+          <img
+            class="brand__mark"
+            src="assets/img/brand-logo.jpg"
+            alt=""
+            width="44"
+            height="44"
+          />
+          <span class="brand__text">
+            <span class="brand__name">Hotels</span>
+            <span class="brand__tag">Luxury Rooms &middot; VVS Grand</span>
+          </span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          id="navToggle"
+          aria-controls="nav"
+          aria-expanded="false"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path id="navToggleIcon" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <span class="visually-hidden">Toggle navigation</span>
+        </button>
+
+        <nav class="nav" id="nav" data-open="false" aria-label="Main">
+          <div class="nav__links" id="navLinks"></div>
+          <div class="nav__cta">
+            <a class="nav__desk" href="desk.html">Front office desk</a>
+            <a class="btn btn--gold btn--sm" href="#enquiry">Enquire</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ==================================================================
+           HERO
+           ================================================================== -->
+      <section class="hero" id="top" data-paused="false">
+        <div class="hero__slides" id="heroSlides"></div>
+        <div class="hero__scrim"></div>
+
+        <div class="wrap hero__inner">
+          <p class="hero__kicker">Park Centre &middot; Pithapuram</p>
+          <h1 class="hero__title">
+            Rooms above the temple,<em>not beside the traffic.</em>
+          </h1>
+          <p class="hero__lede">
+            Spotless upper-floor rooms in VVS Grand with a dedicated lift, hot
+            water around the clock, and a 24-hour stay cycle that follows your
+            train instead of the check-in clock.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--gold" href="#booking">
+              <span>Check dates</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+            <a class="btn btn--ghost" href="#rooms">Explore rooms</a>
+          </div>
+
+          <div class="hero__facts" id="heroFacts"></div>
+        </div>
+
+        <div class="hero__tools">
+          <div class="hero__dots" id="heroDots" role="group" aria-label="Choose a photograph"></div>
+          <button class="hero__pause" type="button" id="heroPause">
+            <span aria-hidden="true" id="heroPauseIcon">&#10074;&#10074;</span>
+            <span id="heroPauseLabel">Pause</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           BOOKING PANEL
+           ================================================================== -->
+      <section class="booking wrap" id="booking" aria-labelledby="booking-h">
+        <div class="booking__shell">
+          <h2 class="visually-hidden" id="booking-h">
+            Check availability and start an enquiry
+          </h2>
+          <div class="booking__grid">
+            <div class="field field--ghost">
+              <label class="field__label" for="bkIn">Check-in</label>
+              <input class="field__control" type="date" id="bkIn" name="bkIn" />
+            </div>
+            <div class="field field--ghost">
+              <label class="field__label" for="bkOut">Check-out</label>
+              <input class="field__control" type="date" id="bkOut" name="bkOut" />
+            </div>
+            <div class="field field--ghost">
+              <label class="field__label" for="bkSlot">Stay cycle</label>
+              <select
+                class="field__control"
+                id="bkSlot"
+                name="bkSlot"
+              ></select>
+            </div>
+            <div class="field field--ghost">
+              <label class="field__label" for="bkRoom">Room category</label>
+              <select
+                class="field__control"
+                id="bkRoom"
+                name="bkRoom"
+              ></select>
+            </div>
+            <div class="booking__submit">
+              <a class="btn btn--gold btn--block" href="#enquiry">
+                <span>Reserve</span>
+                <span aria-hidden="true">&nearr;</span>
+              </a>
+            </div>
+          </div>
+          <p class="booking__note" id="bookingNote"></p>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           ROOMS
+           ================================================================== -->
+      <section class="section" id="rooms" aria-labelledby="rooms-h">
+        <div class="wrap">
+          <div class="section-head section-head--row">
+            <div class="stack--tight" data-reveal>
+              <p class="eyebrow">Flagship accommodations</p>
+              <h2 id="rooms-h">Two room categories, both on the same floor</h2>
+              <p class="lede">
+                Split air conditioning, attached geyser bathrooms and a
+                wardrobe in every room. Switch the photographs on each card to
+                see the bedroom and the bathroom.
+              </p>
+            </div>
+            <span class="badge badge--gold" id="roomsTariffChip"></span>
+          </div>
+
+          <div
+            class="grid-fluid grid-fluid--room"
+            id="roomGrid"
+            aria-live="off"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           AMENITIES
+           ================================================================== -->
+      <section class="section" id="amenities" aria-labelledby="amenities-h">
+        <div class="wrap">
+          <div class="section-head" data-reveal>
+            <p class="eyebrow">Specifications &amp; comforts</p>
+            <h2 id="amenities-h">Amenities &amp; access</h2>
+            <p class="lede">
+              Operational capabilities chosen for senior citizens, early
+              darshans and families arriving on night trains.
+            </p>
+          </div>
+          <div class="grid-fluid grid-fluid--amenity" id="amenityGrid"></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           TEMPLES & TRAVEL
+           ================================================================== -->
+      <section class="section" id="temples" aria-labelledby="temples-h">
+        <div class="wrap">
+          <div class="temple-intro split" id="templeIntro" data-reveal></div>
+
+          <div class="section-head section-head--row" data-reveal>
+            <div class="stack--tight">
+              <p class="eyebrow">Within a short auto ride</p>
+              <h2 id="temples-h">Temples, station and airport</h2>
+            </div>
+            <p class="lede">
+              Open any card for timings, the dress code and the answer the desk
+              gives on the phone.
+            </p>
+          </div>
+
+          <div class="grid-fluid grid-fluid--landmark" id="landmarkGrid"></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           REVIEWS
+           ================================================================== -->
+      <section class="section" id="reviews" aria-labelledby="reviews-h">
+        <div class="wrap">
+          <div class="section-head section-head--row" data-reveal>
+            <div class="stack--tight">
+              <p class="eyebrow">Guest experiences</p>
+              <h2 id="reviews-h">What previous guests wrote</h2>
+              <p class="lede">
+                Quoted feedback from the property's Google Maps and MakeMyTrip
+                listings.
+              </p>
+            </div>
+            <span class="badge" id="reviewPlaceholder">
+              Scores below are layout placeholders
+            </span>
+          </div>
+
+          <div class="grid-fluid grid-fluid--metric" id="metricGrid"></div>
+
+          <div class="grid-fluid grid-fluid--review" id="reviewGrid"></div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           ENQUIRY
+           ================================================================== -->
+      <section class="enquiry section" id="enquiry" aria-labelledby="enquiry-h">
+        <div class="wrap">
+          <div class="enquiry__grid">
+            <div class="card card--pad">
+              <div class="section-head" data-reveal>
+                <p class="eyebrow">Front desk enquiry</p>
+                <h2 id="enquiry-h">Reserve your stay</h2>
+                <p class="lede">
+                  Send the enquiry and the desk calls you back on the same
+                  number. Nothing is charged at this stage.
+                </p>
+              </div>
+
+              <form class="enquiry__form" id="enquiryForm" novalidate>
+                <div class="form-grid">
+                  <div class="field">
+                    <label class="field__label" for="gName"
+                      >Guest full name *</label
+                    >
+                    <input
+                      class="field__control"
+                      id="gName"
+                      name="guestName"
+                      type="text"
+                      autocomplete="name"
+                      placeholder="e.g. Ramesh Varma"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gPhone"
+                      >Mobile / WhatsApp number *</label
+                    >
+                    <input
+                      class="field__control"
+                      id="gPhone"
+                      name="phone"
+                      type="tel"
+                      inputmode="tel"
+                      autocomplete="tel"
+                      placeholder="+91 98765 43210"
+                      required
+                    />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gRoom">Room category</label>
+                    <select class="field__control" id="gRoom" name="roomType"></select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gGuests"
+                      >Guests &amp; rooms</label
+                    >
+                    <select
+                      class="field__control"
+                      id="gGuests"
+                      name="guests"
+                    ></select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gIn">Check-in</label>
+                    <input class="field__control" id="gIn" name="checkIn" type="date" />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gOut">Check-out</label>
+                    <input class="field__control" id="gOut" name="checkOut" type="date" />
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gSlot">Arrival slot</label>
+                    <select class="field__control" id="gSlot" name="slot"></select>
+                  </div>
+                  <div class="field">
+                    <label class="field__label" for="gNote">Special requests</label>
+                    <input
+                      class="field__control"
+                      id="gNote"
+                      name="note"
+                      type="text"
+                      placeholder="Train arrival, senior assistance, extra pillows"
+                    />
+                  </div>
+                </div>
+
+                <p class="field__error" id="formError" role="alert" hidden></p>
+
+                <div class="room__actions">
+                  <button class="btn btn--gold" type="submit">
+                    Send enquiry to the desk
+                  </button>
+                  <a class="btn btn--outline" id="whatsappLink" href="#"
+                    >Message on WhatsApp</a
+                  >
+                </div>
+              </form>
+
+              <div class="confirm" id="confirmPanel" hidden>
+                <p class="eyebrow">Enquiry recorded</p>
+                <p>
+                  Reference <b id="confirmRef"></b> — the desk will call
+                  <span id="confirmPhone"></span> to confirm the room. This
+                  prototype stores enquiries in your browser only.
+                </p>
+                <div class="room__actions">
+                  <a class="btn btn--quiet btn--sm" href="desk.html"
+                    >Open the front office queue</a
+                  >
+                  <button class="btn btn--outline btn--sm" type="button" id="clearConfirm">
+                    Send another
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <aside class="summary" aria-labelledby="summary-h">
+              <div class="summary__head">
+                <p class="eyebrow">Live estimate</p>
+                <h3 id="summary-h" class="landmark__name">Your stay</h3>
+              </div>
+              <div class="summary__rows">
+                <div class="summary__row">
+                  <span>Room</span><span id="sumRoom"></span>
+                </div>
+                <div class="summary__row">
+                  <span>Nights</span><span id="sumNights"></span>
+                </div>
+                <div class="summary__row">
+                  <span>Rate per 24 hours</span><span id="sumRate"></span>
+                </div>
+                <div class="summary__row">
+                  <span>Check-in slot</span><span id="sumSlot"></span>
+                </div>
+              </div>
+              <div class="summary__total">
+                <span>Estimated direct total</span>
+                <b id="sumTotal"></b>
+              </div>
+              <p class="summary__fine">
+                Taxes and fees are quoted by the desk on the call back. OTA
+                comparison rates are indicative.
+              </p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================================
+           LOCATION
+           ================================================================== -->
+      <section class="section" id="location" aria-labelledby="location-h">
+        <div class="wrap">
+          <div class="split">
+            <div data-reveal>
+              <p class="eyebrow">Arrival &amp; connectivity</p>
+              <h2 id="location-h">Finding the desk</h2>
+              <dl class="location__list" id="locationList"></dl>
+              <div class="cluster">
+                <a
+                  class="btn btn--dark"
+                  id="mapsLink"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Get directions</span>
+                  <span aria-hidden="true">&nearr;</span>
+                </a>
+                <a class="btn btn--outline" id="callLink" href="#"
+                  >Call the front desk</a
+                >
+              </div>
+            </div>
+
+            <div class="mapcard" data-reveal>
+              <div class="mapcard__icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="mapcard__title" id="mapCardTitle"></h3>
+              <p class="amenity__desc" id="mapCardAddress"></p>
+              <p class="mono" id="mapCardCoords"></p>
+              <a
+                class="landmark__more"
+                id="mapCardLink"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open in Google Maps
+                <span aria-hidden="true">&#8599;</span
+              ></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================================================================
+         FOOTER — three columns; facts are interpolated, never re-typed
+         ====================================================================== -->
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot__grid">
+          <div>
+            <div class="foot__brand">
+              <img src="assets/img/brand-logo.jpg" alt="" width="44" height="44" />
+              <span>
+                <b>[N] Hotel's</b>
+                <span>Luxury Rooms &middot; VVS Grand</span>
+              </span>
+            </div>
+            <p>
+              Upper-floor rooms above Park Centre, with spotless housekeeping,
+              round-the-clock hot water and a stay cycle built around temple
+              timings and night trains.
+            </p>
+          </div>
+
+          <nav aria-labelledby="foot-guide-h">
+            <h3 id="foot-guide-h">Property guide</h3>
+            <ul class="foot__links" id="footerGuide"></ul>
+          </nav>
+
+          <div>
+            <h3>Front desk</h3>
+            <div class="foot__contact">
+              <p>
+                <a id="footPhone" href="#">+91 95158 44616</a><br />
+                Staffed 24 hours, every day
+              </p>
+              <p id="footAddress"></p>
+              <p>
+                <a id="footMaps" href="#" target="_blank" rel="noopener noreferrer"
+                  >Google Maps listing &#8599;</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="foot__bottom">
+          <span id="footLegal"></span>
+          <span
+            >Interactive design prototype &mdash; enquiry records stay in this
+            browser.</span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- One persistent mobile CTA; hidden from 1024px where the header has one -->
+    <div class="mobile-cta" id="mobileCta" data-show="false">
+      <a class="btn btn--gold btn--sm" href="#enquiry">Enquire</a>
+      <a class="btn btn--ghost btn--sm" id="mobileCall" href="#">Call desk</a>
+    </div>
+
+    <!-- ======================================================================
+         LANDMARK SHEET + TOAST
+         ====================================================================== -->
+    <div class="sheet" id="sheet" hidden>
+      <div class="sheet__backdrop" data-sheet-close></div>
+      <div
+        class="sheet__panel"
+        id="sheetPanel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sheet-title"
+        tabindex="-1"
+      ></div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden>
+      <span class="toast__dot" aria-hidden="true"></span>
+      <p id="toastText"></p>
+      <button class="toast__dismiss" type="button" id="toastDismiss" aria-label="Dismiss notification">
+        &#10005;
+      </button>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/behaviours.js"></script>
+  </body>
+</html>

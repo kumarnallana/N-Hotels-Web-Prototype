@@ -1,0 +1,28 @@
+# Node dependencies & builds
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# Logs & temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+install.log
+.qa/
+
+# Environment files
+.env*
+!.env.example
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/settings.json
+.idea/
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts

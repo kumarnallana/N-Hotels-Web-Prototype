@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   DESIGN TOKENS — one palette, declared by ROLE, no duplicates.
+
+   The previous revision carried 19 colour tokens including two near-identical
+   darks (#17120f / #1c1613), two near-identical off-whites (#faf8f5 / #f2ede6),
+   three greys split across light and dark themes, and plum as a second brand
+   hue competing with gold. That is what read as "inconsistent palette".
+   Every token below has one job and is named for that job.
+
+   Contrast is measured, not assumed. WCAG 2.1 ratios, verified against the
+   reference pairs black/white = 21.00 and #767676/white = 4.54:
+
+     ink        #1c1613 on ivory #faf7f2   16.75   AAA body text
+     ink-soft   #5c534c on ivory            7.03   AAA secondary
+     gold-ink   #7a5f28 on ivory            5.62   AA labels on light
+     gold-ink   #7a5f28 on card #ffffff     6.01   AA labels on cards
+     ink        #1c1613 on gold  #c5a059    7.28   AAA button labels
+     on-night   #f5f3f1 on night #17120f   16.79   AAA
+     on-night-soft #c9bcac on night          9.98   AAA
+
+   Gold is a SURFACE colour (fills, rules, icons, buttons). It is never body
+   text on a light ground: #c5a059 on ivory is 2.30:1 and fails. Text that
+   should look gold uses --color-gold-ink, which is the same hue darkened
+   until it passes.
+   ========================================================================== */
+@theme static {
+  /* Surfaces — three light tiers and one dark, used for the whole site. */
+  --color-ivory: #faf7f2;
+  --color-card: #ffffff;
+  --color-sand: #f1eae0;
+  --color-night: #17120f;
+  /* The raised state of a night surface — a button on the footer, a selected
+     row in the desk queue. Named for what it is, not reused from the text ramp. */
+  --color-night-raise: #241d18;
+
+  /* Lines. */
+  --color-line: #e4dcd0;
+  --color-line-strong: #d3c7b6;
+  --color-line-night: #2f2723;
+
+  /* Text. */
+  --color-ink: #1c1613;
+  --color-ink-soft: #5c534c;
+  --color-on-night: #f5f3f1;
+  --color-on-night-soft: #c9bcac;
+
+  /* Brand accent. */
+  --color-gold: #c5a059;
+  --color-gold-deep: #a8873e;
+  --color-gold-ink: #7a5f28;
+  --color-gold-light: #e6c98a;
+  --color-gold-tint: #f5ead6;
+
+  /* Semantic. */
+  --color-success: #2f6b4f;
+  --color-success-tint: #e7f0ea;
+  --color-warning: #8a5a12;
+  --color-warning-tint: #f7eddd;
+  --color-danger: #9b2f22;
+  --color-danger-tint: #f7e7e4;
+  --color-line-danger: #d9a79f;
+
+  /* Type. Serif for display, humanist sans for reading. */
+  --font-display: var(--font-serif), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans-stack), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Scale is mobile-first: each clamp starts at the size a 360px phone gets,
+     so nothing has to be shrunk into legibility by the reader. */
+  --text-display: clamp(2rem, 1.45rem + 2.6vw, 3.9rem);
+  --text-title: clamp(1.55rem, 1.25rem + 1.4vw, 2.5rem);
+  --text-heading: clamp(1.2rem, 1.1rem + 0.5vw, 1.55rem);
+  --text-lede: clamp(1rem, 0.98rem + 0.15vw, 1.15rem);
+  /* `reading`, not `body`: --color-body would claim the text-body utility name. */
+  --text-reading: 1rem;
+  --text-small: 0.875rem;
+  /* 12px is the practical floor on a phone; the previous 0.68rem = 10.9px. */
+  --text-micro: 0.75rem;
+
+  /* Space. */
+  --breakpoint-xs: 26rem;
+  --spacing-gutter: clamp(1rem, 0.85rem + 1.2vw, 2rem);
+  --spacing-section: clamp(2.5rem, 2rem + 3vw, 6rem);
+  --spacing-block: clamp(1.25rem, 1rem + 1.2vw, 2rem);
+
+  /* Radii and elevation. Two shadows only, both short and low — the previous
+     60px blurred lifts are what made sections look like they were floating. */
+  --radius-card: 0.875rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgb(28 22 19 / 0.06), 0 4px 12px -6px rgb(28 22 19 / 0.1);
+  --shadow-raise: 0 1px 2px rgb(28 22 19 / 0.06), 0 10px 24px -12px rgb(28 22 19 / 0.18);
+
+  /* Layout constants read through var() in hand-written CSS. `static` keeps
+     Tailwind from pruning them. */
+  --nav-height: 3.5rem;
+  --tap-target: 2.75rem;
+  --content-max: 72rem;
+  /* Chrome stacked above the hero at the top of the page: the sticky header
+     (3.5rem) and the promise bar it sits under (~4rem). The hero band is the
+     viewport minus this, so the first screen is filled without the hero ever
+     being taller than the fold. */
+  --hero-chrome: 7.5rem;
+}
+
+/* ==========================================================================
+   BASE
+   No transitions, no keyframes, no scroll animation anywhere in this file.
+   Hover and focus change state instantly; the page does not move.
+   ========================================================================== */
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    /* Anchored sections must clear the sticky header, or the nav lands on top
+       of the heading it just scrolled to — the bug in the original screenshots. */
+    scroll-padding-block-start: calc(var(--nav-height) + 0.75rem);
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-ivory);
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-reading);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.14;
+    letter-spacing: -0.014em;
+    text-wrap: balance;
+    color: var(--color-ink);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  /* A control inheriting the browser's tiny default is the single most common
+     cause of a site feeling "unresponsive" on a phone. 44px is the platform
+     minimum, so every interactive node gets one. */
+  :where(button, a, select, input[type="date"]):where(.tap) {
+    min-block-size: var(--tap-target);
+    min-inline-size: 2.75rem;
+  }
+
+  /* Phones report their real orientation; stop the page shifting under a
+     landscape keyboard. */
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+   COMPONENT CLASSES
+   Plain CSS against the tokens rather than @apply chains, so a Tailwind
+   version change cannot silently break them.
+   ========================================================================== */
+@layer components {
+  .wrap {
+    width: min(var(--content-max), 100% - (var(--spacing-gutter) * 2));
+    margin-inline: auto;
+  }
+
+  .section {
+    padding-block: var(--spacing-section);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold-ink);
+  }
+
+  .eyebrow-on-night {
+    color: var(--color-gold-light);
+  }
+
+  .lede {
+    font-size: var(--text-lede);
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    max-width: 44ch;
+  }
+
+  /* Card surfaces come from the <Card> component, which composes the same three
+     tokens. A `.card` class here was a second owner of the same look, and the
+     two had already drifted. */
+
+  .rule-gold {
+    background: var(--color-gold);
+    block-size: 2px;
+  }
+
+  /* The one deliberate colour break on the page: footer and hero scrim. */
+  .night {
+    background: var(--color-night);
+    color: var(--color-on-night);
+  }
+
+  .night h2,
+  .night h3 {
+    color: var(--color-on-night);
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   Functional only. Nothing here animates.
+   ========================================================================== */
+@layer utilities {
+  /* Fades the end of a horizontal scroller so a partially visible chip reads
+     as "there is more", without a scrollbar on a phone. */
+  .mask-fade-r {
+    -webkit-mask-image: linear-gradient(to right, #000 78%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 78%, transparent 100%);
+  }
+
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
