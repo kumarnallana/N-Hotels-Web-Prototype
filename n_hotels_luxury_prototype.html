@@ -177,9 +177,16 @@
         left: 0;
         right: 0;
         z-index: 40;
-        transition: background 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        background: linear-gradient(to bottom, rgba(20, 16, 13, 0.8), transparent);
+        background: linear-gradient(
+          to bottom,
+          rgba(20, 16, 13, 0.8),
+          transparent
+        );
       }
       .nh-home .nh-header.is-scrolled {
         background: rgba(25, 20, 18, 0.92);
@@ -281,7 +288,10 @@
         color: #191412;
         font-weight: 700;
         box-shadow: 0 8px 24px -4px rgba(197, 160, 89, 0.45);
-        transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1), filter 250ms ease;
+        transition:
+          transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 250ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 250ms ease;
       }
       .nh-home .nh-signup {
         min-height: 40px;
@@ -313,7 +323,12 @@
         left: 0;
         width: 50%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
         transform: skewX(-20deg) translateX(-150%);
         transition: none;
       }
@@ -322,8 +337,12 @@
         animation: shimmerSweep 1s ease-in-out;
       }
       @keyframes shimmerSweep {
-        0% { transform: skewX(-20deg) translateX(-150%); }
-        100% { transform: skewX(-20deg) translateX(250%); }
+        0% {
+          transform: skewX(-20deg) translateX(-150%);
+        }
+        100% {
+          transform: skewX(-20deg) translateX(250%);
+        }
       }
 
       /* MOBILE MENU TOGGLE */
@@ -366,7 +385,9 @@
         object-position: center;
         opacity: 0;
         transform: scale(1.08);
-        transition: opacity 1000ms ease, transform 6000ms cubic-bezier(0.25, 1, 0.5, 1);
+        transition:
+          opacity 1000ms ease,
+          transform 6000ms cubic-bezier(0.25, 1, 0.5, 1);
       }
       .nh-home .nh-slide.is-active {
         opacity: 1;
@@ -374,7 +395,12 @@
       }
       .nh-home .nh-shade {
         background:
-          linear-gradient(90deg, rgba(16, 12, 10, 0.92) 0%, rgba(16, 12, 10, 0.68) 48%, rgba(16, 12, 10, 0.25) 100%),
+          linear-gradient(
+            90deg,
+            rgba(16, 12, 10, 0.92) 0%,
+            rgba(16, 12, 10, 0.68) 48%,
+            rgba(16, 12, 10, 0.25) 100%
+          ),
           linear-gradient(0deg, rgba(16, 12, 10, 0.8) 0%, transparent 45%);
       }
       .nh-home .nh-hero-content {
@@ -451,8 +477,12 @@
         animation: slideProgress 5s linear forwards;
       }
       @keyframes slideProgress {
-        from { width: 0%; }
-        to { width: 100%; }
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
       }
 
       /* 250 METRES SECTION */
@@ -1237,9 +1267,9 @@
                       <button
                         class="nh-menu-toggle"
                         type="button"
-                        aria-label=${mobileNavOpen
-                          ? "Close navigation"
-                          : "Open navigation"}
+                        aria-label=${
+                          mobileNavOpen ? "Close navigation" : "Open navigation"
+                        }
                         aria-expanded=${mobileNavOpen ? "true" : "false"}
                         onClick=${() => setMobileNavOpen(!mobileNavOpen)}
                       >
@@ -1252,9 +1282,11 @@
                           aria-hidden="true"
                         >
                           <path
-                            d=${mobileNavOpen
-                              ? "M6 18L18 6M6 6l12 12"
-                              : "M4 6h16M4 12h16M4 18h16"}
+                            d=${
+                              mobileNavOpen
+                                ? "M6 18L18 6M6 6l12 12"
+                                : "M4 6h16M4 12h16M4 18h16"
+                            }
                           ></path>
                         </svg>
                       </button>
@@ -2631,21 +2663,24 @@
                               </div>
                             </form>
 
-                            ${submittedEnquiry &&
-                            html`
-                              <div
-                                class="mt-5 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900"
-                              >
-                                <p class="font-bold">
-                                  Enquiry Recorded (Ref: ${submittedEnquiry.id})
-                                </p>
-                                <p class="mt-0.5 text-emerald-800">
-                                  Thank you, ${submittedEnquiry.guestName}. Your
-                                  stay request has been submitted to the front
-                                  desk.
-                                </p>
-                              </div>
-                            `}
+                            ${
+                              submittedEnquiry &&
+                              html`
+                                <div
+                                  class="mt-5 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900"
+                                >
+                                  <p class="font-bold">
+                                    Enquiry Recorded (Ref:
+                                    ${submittedEnquiry.id})
+                                  </p>
+                                  <p class="mt-0.5 text-emerald-800">
+                                    Thank you, ${submittedEnquiry.guestName}.
+                                    Your stay request has been submitted to the
+                                    front desk.
+                                  </p>
+                                </div>
+                              `
+                            }
                           </div>
 
                           <!-- Tariff Breakdown Column -->
@@ -2676,9 +2711,9 @@
                                   <span class="font-semibold text-white"
                                     >₹${baseNightRate.toLocaleString("en-IN")} ×
                                     ${bookingNights}
-                                    ${bookingNights > 1
-                                      ? "nights"
-                                      : "night"}</span
+                                    ${
+                                      bookingNights > 1 ? "nights" : "night"
+                                    }</span
                                   >
                                 </div>
                                 <div class="flex justify-between">
@@ -2894,260 +2929,263 @@
                 <!-- ==================================================== -->
                 <!-- 12. SACRED LANDMARK & N-AI CONCIERGE MODAL / SHEET   -->
                 <!-- ==================================================== -->
-                ${selectedLandmark &&
-                html`
-                  <div
-                    class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
-                  >
-                    <!-- Click Outside Backdrop -->
+                ${
+                  selectedLandmark &&
+                  html`
                     <div
-                      class="fixed inset-0"
-                      onClick=${() => setSelectedLandmark(null)}
-                    ></div>
-
-                    <!-- Modal Sheet Container (Mobile Bottom Sheet / Desktop Dialog) -->
-                    <div
-                      class="relative bg-white w-full sm:max-w-xl rounded-t-2xl sm:rounded-2xl shadow-2xl z-10 max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom duration-200"
+                      class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4"
                     >
-                      <!-- Mobile Drag Handle -->
+                      <!-- Click Outside Backdrop -->
                       <div
-                        class="sm:hidden w-12 h-1 bg-surface-borderDark rounded-full mx-auto my-2.5 shrink-0"
+                        class="fixed inset-0"
+                        onClick=${() => setSelectedLandmark(null)}
                       ></div>
 
-                      <!-- Modal Header -->
+                      <!-- Modal Sheet Container (Mobile Bottom Sheet / Desktop Dialog) -->
                       <div
-                        class="px-6 py-4 border-b border-surface-border flex items-start justify-between bg-white shrink-0"
+                        class="relative bg-white w-full sm:max-w-xl rounded-t-2xl sm:rounded-2xl shadow-2xl z-10 max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom duration-200"
                       >
-                        <div>
-                          <div class="flex items-center space-x-2">
-                            <span
-                              class="text-[10px] font-bold uppercase tracking-wider text-brand-plum px-2 py-0.5 rounded bg-brand-plumLight border border-brand-plum/10"
-                            >
-                              ${selectedLandmark.type}
-                            </span>
-                            <span
-                              class="text-xs font-semibold text-brand-goldDark"
-                            >
-                              ${selectedLandmark.distance}
-                              (${selectedLandmark.time})
-                            </span>
-                          </div>
-                          <h3
-                            class="text-lg sm:text-xl font-bold text-surface-dark mt-1"
-                          >
-                            ${selectedLandmark.name}
-                          </h3>
-                        </div>
-
-                        <button
-                          onClick=${() => setSelectedLandmark(null)}
-                          class="p-2 text-surface-dark/40 hover:text-surface-dark rounded-lg hover:bg-surface-alabaster transition-colors"
-                          aria-label="Close Modal"
-                        >
-                          <svg
-                            class="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-
-                      <!-- Modal Scrollable Content -->
-                      <div
-                        class="px-6 py-5 overflow-y-auto space-y-5 text-xs text-surface-dark/80"
-                      >
-                        <!-- About this Location -->
-                        <div>
-                          <h4
-                            class="text-xs font-bold uppercase tracking-wider text-surface-dark/40 mb-1"
-                          >
-                            About this Location
-                          </h4>
-                          <p
-                            class="text-surface-dark leading-relaxed text-xs sm:text-sm"
-                          >
-                            ${selectedLandmark.significance}
-                          </p>
-                        </div>
-
-                        <!-- Darshan & Schedule Grid -->
+                        <!-- Mobile Drag Handle -->
                         <div
-                          class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-surface-alabaster rounded-xl border border-surface-border"
+                          class="sm:hidden w-12 h-1 bg-surface-borderDark rounded-full mx-auto my-2.5 shrink-0"
+                        ></div>
+
+                        <!-- Modal Header -->
+                        <div
+                          class="px-6 py-4 border-b border-surface-border flex items-start justify-between bg-white shrink-0"
                         >
                           <div>
-                            <p class="font-bold text-surface-dark mb-0.5">
-                              Visiting & Open Hours
-                            </p>
-                            <p class="text-surface-dark/70">
-                              ${selectedLandmark.darshanTimings}
-                            </p>
-                          </div>
-                          <div>
-                            <p class="font-bold text-surface-dark mb-0.5">
-                              Aarti & Puja Timings
-                            </p>
-                            <p class="text-surface-dark/70">
-                              ${selectedLandmark.aartiTimings}
-                            </p>
-                          </div>
-                          <div
-                            class="sm:col-span-2 pt-2 border-t border-surface-border"
-                          >
-                            <p class="font-bold text-surface-dark mb-0.5">
-                              Prasadam / Annadanam
-                            </p>
-                            <p class="text-surface-dark/70">
-                              ${selectedLandmark.annadanam}
-                            </p>
-                          </div>
-                        </div>
-
-                        <!-- N-AI Interactive Concierge Section -->
-                        <div
-                          class="p-4 rounded-xl bg-brand-plumLight/70 border border-brand-plum/20"
-                        >
-                          <div class="flex items-center justify-between mb-2">
-                            <div class="flex items-center space-x-1.5">
+                            <div class="flex items-center space-x-2">
                               <span
-                                class="w-2 h-2 rounded-full bg-brand-plum animate-pulse"
-                              ></span>
-                              <span
-                                class="font-bold text-brand-plum uppercase text-[10px] tracking-wider"
+                                class="text-[10px] font-bold uppercase tracking-wider text-brand-plum px-2 py-0.5 rounded bg-brand-plumLight border border-brand-plum/10"
                               >
-                                N-AI Guest Concierge
+                                ${selectedLandmark.type}
+                              </span>
+                              <span
+                                class="text-xs font-semibold text-brand-goldDark"
+                              >
+                                ${selectedLandmark.distance}
+                                (${selectedLandmark.time})
                               </span>
                             </div>
-                            <span
-                              class="text-[10px] text-brand-plum/80 font-medium"
-                              >Verified Local Advice</span
+                            <h3
+                              class="text-lg sm:text-xl font-bold text-surface-dark mt-1"
                             >
+                              ${selectedLandmark.name}
+                            </h3>
                           </div>
 
-                          <p
-                            class="text-surface-dark/80 mb-3 text-[11px] leading-relaxed"
+                          <button
+                            onClick=${() => setSelectedLandmark(null)}
+                            class="p-2 text-surface-dark/40 hover:text-surface-dark rounded-lg hover:bg-surface-alabaster transition-colors"
+                            aria-label="Close Modal"
                           >
-                            Tap any common guest question below for instant
-                            answers from [N] Hotel's concierge intelligence:
-                          </p>
-
-                          <!-- Pre-set Questions -->
-                          <div class="space-y-1.5">
-                            ${selectedLandmark.aiInsights.map(
-                              (item, idx) => html`
-                                <div
-                                  key=${idx}
-                                  class="bg-white rounded-lg border border-surface-border overflow-hidden"
-                                >
-                                  <button
-                                    onClick=${() =>
-                                      setAiActiveQuestion(
-                                        aiActiveQuestion === idx ? null : idx,
-                                      )}
-                                    class="w-full px-3 py-2 text-left text-xs font-semibold text-surface-dark flex items-center justify-between hover:bg-surface-alabaster transition-colors"
-                                  >
-                                    <span>${item.q}</span>
-                                    <span class="text-brand-plum font-bold ml-2"
-                                      >${aiActiveQuestion === idx
-                                        ? "−"
-                                        : "+"}</span
-                                    >
-                                  </button>
-                                  ${aiActiveQuestion === idx &&
-                                  html`
-                                    <div
-                                      class="px-3 pb-2.5 pt-1 text-[11px] text-surface-dark/70 leading-relaxed border-t border-surface-border bg-surface-alabaster/60"
-                                    >
-                                      ${item.a}
-                                    </div>
-                                  `}
-                                </div>
-                              `,
-                            )}
-                          </div>
+                            <svg
+                              class="w-5 h-5"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
                         </div>
 
-                        <!-- Front Desk Assistance Notice -->
+                        <!-- Modal Scrollable Content -->
                         <div
-                          class="flex items-center justify-between text-[11px] text-surface-dark/60 pt-2 border-t border-surface-border"
+                          class="px-6 py-5 overflow-y-auto space-y-5 text-xs text-surface-dark/80"
                         >
-                          <span>Need transport or early wakeup call?</span>
-                          <a
-                            href="tel:${HOTEL.phoneRaw}"
-                            class="text-brand-plum font-bold hover:underline"
+                          <!-- About this Location -->
+                          <div>
+                            <h4
+                              class="text-xs font-bold uppercase tracking-wider text-surface-dark/40 mb-1"
+                            >
+                              About this Location
+                            </h4>
+                            <p
+                              class="text-surface-dark leading-relaxed text-xs sm:text-sm"
+                            >
+                              ${selectedLandmark.significance}
+                            </p>
+                          </div>
+
+                          <!-- Darshan & Schedule Grid -->
+                          <div
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 bg-surface-alabaster rounded-xl border border-surface-border"
                           >
-                            Call Front Desk: +91 95158 44616
-                          </a>
+                            <div>
+                              <p class="font-bold text-surface-dark mb-0.5">
+                                Visiting & Open Hours
+                              </p>
+                              <p class="text-surface-dark/70">
+                                ${selectedLandmark.darshanTimings}
+                              </p>
+                            </div>
+                            <div>
+                              <p class="font-bold text-surface-dark mb-0.5">
+                                Aarti & Puja Timings
+                              </p>
+                              <p class="text-surface-dark/70">
+                                ${selectedLandmark.aartiTimings}
+                              </p>
+                            </div>
+                            <div
+                              class="sm:col-span-2 pt-2 border-t border-surface-border"
+                            >
+                              <p class="font-bold text-surface-dark mb-0.5">
+                                Prasadam / Annadanam
+                              </p>
+                              <p class="text-surface-dark/70">
+                                ${selectedLandmark.annadanam}
+                              </p>
+                            </div>
+                          </div>
+
+                          <!-- N-AI Interactive Concierge Section -->
+                          <div
+                            class="p-4 rounded-xl bg-brand-plumLight/70 border border-brand-plum/20"
+                          >
+                            <div class="flex items-center justify-between mb-2">
+                              <div class="flex items-center space-x-1.5">
+                                <span
+                                  class="w-2 h-2 rounded-full bg-brand-plum animate-pulse"
+                                ></span>
+                                <span
+                                  class="font-bold text-brand-plum uppercase text-[10px] tracking-wider"
+                                >
+                                  N-AI Guest Concierge
+                                </span>
+                              </div>
+                              <span
+                                class="text-[10px] text-brand-plum/80 font-medium"
+                                >Verified Local Advice</span
+                              >
+                            </div>
+
+                            <p
+                              class="text-surface-dark/80 mb-3 text-[11px] leading-relaxed"
+                            >
+                              Tap any common guest question below for instant
+                              answers from [N] Hotel's concierge intelligence:
+                            </p>
+
+                            <!-- Pre-set Questions -->
+                            <div class="space-y-1.5">
+                              ${selectedLandmark.aiInsights.map(
+                                (item, idx) => html`
+                                  <div
+                                    key=${idx}
+                                    class="bg-white rounded-lg border border-surface-border overflow-hidden"
+                                  >
+                                    <button
+                                      onClick=${() =>
+                                        setAiActiveQuestion(
+                                          aiActiveQuestion === idx ? null : idx,
+                                        )}
+                                      class="w-full px-3 py-2 text-left text-xs font-semibold text-surface-dark flex items-center justify-between hover:bg-surface-alabaster transition-colors"
+                                    >
+                                      <span>${item.q}</span>
+                                      <span
+                                        class="text-brand-plum font-bold ml-2"
+                                        >${aiActiveQuestion === idx
+                                          ? "−"
+                                          : "+"}</span
+                                      >
+                                    </button>
+                                    ${aiActiveQuestion === idx &&
+                                    html`
+                                      <div
+                                        class="px-3 pb-2.5 pt-1 text-[11px] text-surface-dark/70 leading-relaxed border-t border-surface-border bg-surface-alabaster/60"
+                                      >
+                                        ${item.a}
+                                      </div>
+                                    `}
+                                  </div>
+                                `,
+                              )}
+                            </div>
+                          </div>
+
+                          <!-- Front Desk Assistance Notice -->
+                          <div
+                            class="flex items-center justify-between text-[11px] text-surface-dark/60 pt-2 border-t border-surface-border"
+                          >
+                            <span>Need transport or early wakeup call?</span>
+                            <a
+                              href="tel:${HOTEL.phoneRaw}"
+                              class="text-brand-plum font-bold hover:underline"
+                            >
+                              Call Front Desk: +91 95158 44616
+                            </a>
+                          </div>
                         </div>
-                      </div>
 
-                      <!-- Sticky Bottom Action Bar -->
-                      <div
-                        class="px-6 py-3.5 bg-surface-alabaster border-t border-surface-border flex items-center justify-between gap-3 shrink-0"
-                      >
-                        <!-- Left Button: View live map location -->
-                        <a
-                          href=${selectedLandmark.mapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="flex-1 bg-white hover:bg-slate-50 text-surface-dark text-xs font-semibold py-2.5 px-3 rounded-lg border border-surface-border text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
+                        <!-- Sticky Bottom Action Bar -->
+                        <div
+                          class="px-6 py-3.5 bg-surface-alabaster border-t border-surface-border flex items-center justify-between gap-3 shrink-0"
                         >
-                          <svg
-                            class="w-4 h-4 text-brand-gold shrink-0"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                          <!-- Left Button: View live map location -->
+                          <a
+                            href=${selectedLandmark.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex-1 bg-white hover:bg-slate-50 text-surface-dark text-xs font-semibold py-2.5 px-3 rounded-lg border border-surface-border text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
                           >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            />
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                          </svg>
-                          <span>View live map location</span>
-                        </a>
+                            <svg
+                              class="w-4 h-4 text-brand-gold shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                              />
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                              />
+                            </svg>
+                            <span>View live map location</span>
+                          </a>
 
-                        <!-- Right Button: View NAI (for more information) -->
-                        <button
-                          onClick=${() => {
-                            setAiActiveQuestion(0);
-                            triggerToast("N-AI Concierge insights loaded.");
-                          }}
-                          class="flex-1 bg-brand-plum hover:bg-brand-plumHover text-white text-xs font-semibold py-2.5 px-3 rounded-lg text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
-                        >
-                          <svg
-                            class="w-4 h-4 text-brand-gold shrink-0"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
+                          <!-- Right Button: View NAI (for more information) -->
+                          <button
+                            onClick=${() => {
+                              setAiActiveQuestion(0);
+                              triggerToast("N-AI Concierge insights loaded.");
+                            }}
+                            class="flex-1 bg-brand-plum hover:bg-brand-plumHover text-white text-xs font-semibold py-2.5 px-3 rounded-lg text-center transition-colors flex items-center justify-center space-x-1.5 shadow-xs"
                           >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M13 10V3L4 14h7v7l9-11h-7z"
-                            />
-                          </svg>
-                          <span>View NAI (for more info)</span>
-                        </button>
+                            <svg
+                              class="w-4 h-4 text-brand-gold shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M13 10V3L4 14h7v7l9-11h-7z"
+                              />
+                            </svg>
+                            <span>View NAI (for more info)</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                `}
+                  `
+                }
 
                 <!-- ==================================================== -->
                 <!-- PREMIUM LUXURY HOSPITALITY FOOTER                     -->
